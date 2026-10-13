@@ -8,3 +8,4 @@ out
 
 # Gravações brutas (grandes demais para o Git)
 public/raw
+public/proxy

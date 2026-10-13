@@ -1,0 +1,98 @@
+[
+{
+"parte": "parte1",
+"inicio": 0.0,
+"fim": 96.317,
+"layout": "camera"
+},
+{
+"parte": "parte1",
+"inicio": 96.367,
+"fim": 282.85,
+"layout": "celular"
+},
+{
+"parte": "parte1",
+"inicio": 282.9,
+"fim": 286.267,
+"layout": "camera"
+},
+{
+"parte": "parte1",
+"inicio": 286.317,
+"fim": 395.15,
+"layout": "tela"
+},
+{
+"parte": "parte1",
+"inicio": 395.2,
+"fim": 421.983,
+"layout": "celular"
+},
+{
+"parte": "parte1",
+"inicio": 422.033,
+"fim": 429.0,
+"layout": "camera"
+},
+{
+"parte": "parte1",
+"inicio": 429.05,
+"fim": 516.13,
+"layout": "tela"
+},
+{
+"parte": "parte2",
+"inicio": 0.0,
+"fim": 42.0,
+"layout": "tela"
+},
+{
+"parte": "parte2",
+"inicio": 42.05,
+"fim": 80.867,
+"layout": "celular"
+},
+{
+"parte": "parte2",
+"inicio": 80.917,
+"fim": 93.767,
+"layout": "camera"
+},
+{
+"parte": "parte2",
+"inicio": 93.817,
+"fim": 169.717,
+"layout": "tela"
+},
+{
+"parte": "parte2",
+"inicio": 169.767,
+"fim": 204.083,
+"layout": "celular"
+},
+{
+"parte": "parte2",
+"inicio": 204.133,
+"fim": 279.933,
+"layout": "camera"
+},
+{
+"parte": "parte2",
+"inicio": 279.983,
+"fim": 283.083,
+"layout": "tela"
+},
+{
+"parte": "parte2",
+"inicio": 283.133,
+"fim": 314.6,
+"layout": "celular"
+},
+{
+"parte": "parte2",
+"inicio": 314.65,
+"fim": 439.78,
+"layout": "camera"
+}
+]
