@@ -5,3 +5,6 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+
+# Gravações brutas (grandes demais para o Git)
+public/raw
