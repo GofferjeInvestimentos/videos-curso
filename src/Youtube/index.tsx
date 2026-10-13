@@ -17,7 +17,7 @@ const props: DadosEdicao = {
   cenas,
   zooms,
   marca: "Gofferjé Investimentos",
-  legendas: true,
+  legendas: false,
 };
 
 export const ComposicaoYoutube: React.FC = () => (
