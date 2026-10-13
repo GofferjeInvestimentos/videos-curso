@@ -28,3 +28,14 @@ Para outra aula sem mexer no código, passe as props por JSON:
 ```bash
 npx remotion render AulaVertical out/aula2.mp4 --props=aula2.json
 ```
+
+## Edição completa para o YouTube (`AulaYoutube`)
+
+Fluxo usado na aula da carteira pública (gravações brutas ficam em `raw/`, fora do Git):
+
+1. Proxies 30 fps com áudio normalizado em `public/proxy/parte1.mp4` e `parte2.mp4`.
+2. `python scripts/transcrever.py <audio.wav> <saida.json>` — transcrição com timestamps por palavra.
+3. `scripts/remover.json` — trechos descartados (repetições, hesitações).
+4. `python scripts/montar_edicao.py <pasta_analise>` — gera `src/Youtube/dados/clipes.json` (cortes e enquadramentos).
+5. `src/Youtube/roteiro.tsx` — animações e zooms ancorados nos instantes da fala.
+6. `npx remotion render AulaYoutube out/aula.mp4`
