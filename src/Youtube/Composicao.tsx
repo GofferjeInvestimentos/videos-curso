@@ -39,16 +39,25 @@ export type DadosEdicao = {
 const AVATAR = 150;
 const TRANSICAO = 8;
 
-const posicionar = (linha: ClipeNaLinha[], fps: number, ancora: Ancora, duracao: number) => {
+const posicionar = (
+  linha: ClipeNaLinha[],
+  fps: number,
+  ancora: Ancora,
+  duracao: number,
+) => {
   const de = paraQuadro(linha, fps, ancora);
   if (de === null) {
-    throw new Error(`Âncora fora dos trechos mantidos: ${ancora.parte} ${ancora.t}s`);
+    throw new Error(
+      `Âncora fora dos trechos mantidos: ${ancora.parte} ${ancora.t}s`,
+    );
   }
   return { de, quadros: Math.round(duracao * fps) };
 };
 
 // Aproxima a câmera de uma região da tela (ex.: indicador no Status Invest).
-const useZoomTela = (zooms: Array<ZoomTela & { de: number; quadros: number }>) => {
+const useZoomTela = (
+  zooms: Array<ZoomTela & { de: number; quadros: number }>,
+) => {
   const frame = useCurrentFrame();
   const z = zooms.find((x) => frame >= x.de && frame < x.de + x.quadros);
   if (!z) return undefined;
@@ -58,7 +67,11 @@ const useZoomTela = (zooms: Array<ZoomTela & { de: number; quadros: number }>) =
     frame - z.de,
     [0, 14, z.quadros - 14, z.quadros],
     [0, 1, 1, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => t * t * (3 - 2 * t) },
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: (t) => t * t * (3 - 2 * t),
+    },
   );
   const s = 1 + (alvo - 1) * p;
   // Mantém a região centralizada sem mostrar fora do quadro.
@@ -69,24 +82,40 @@ const useZoomTela = (zooms: Array<ZoomTela & { de: number; quadros: number }>) =
   return `translate(${tx}px, ${ty}px) scale(${s})`;
 };
 
+type CenaNaLinha = Cena & { de: number; quadros: number };
+
+const RenderCena: React.FC<{ cena: CenaNaLinha }> = ({ cena }) => {
+  const Render = cena.render;
+  return (
+    <Sequence from={cena.de} durationInFrames={cena.quadros} name={cena.id}>
+      <Html5Audio src={staticFile("sfx/tick.wav")} volume={0.3} />
+      <Render />
+    </Sequence>
+  );
+};
+
 const Palco: React.FC<{
   linha: ClipeNaLinha[];
   fps: number;
   zooms: Array<ZoomTela & { de: number; quadros: number }>;
-}> = ({ linha, fps, zooms }) => {
+  marcacoes: CenaNaLinha[];
+}> = ({ linha, fps, zooms, marcacoes }) => {
   const transform = useZoomTela(zooms);
   return (
     <AbsoluteFill style={{ transformOrigin: "0 0", transform }}>
       <TrilhaVideo linha={linha} fps={fps} />
+      {marcacoes.map((c) => (
+        <RenderCena key={c.id} cena={c} />
+      ))}
     </AbsoluteFill>
   );
 };
 
 // Entrada/saída das cenas de tela cheia: cortina que sobe e desce.
-const TransicaoCheia: React.FC<{ quadros: number; children: React.ReactNode }> = ({
-  quadros,
-  children,
-}) => {
+const TransicaoCheia: React.FC<{
+  quadros: number;
+  children: React.ReactNode;
+}> = ({ quadros, children }) => {
   const frame = useCurrentFrame();
   const entrada = interpolate(frame, [0, TRANSICAO], [100, 0], {
     extrapolateRight: "clamp",
@@ -97,21 +126,28 @@ const TransicaoCheia: React.FC<{ quadros: number; children: React.ReactNode }> =
     easing: (t) => t * t * t,
   });
   return (
-    <AbsoluteFill style={{ clipPath: `inset(${entrada}% 0 ${saida}% 0)` }}>{children}</AbsoluteFill>
+    <AbsoluteFill style={{ clipPath: `inset(${entrada}% 0 ${saida}% 0)` }}>
+      {children}
+    </AbsoluteFill>
   );
 };
 
-const Avatar: React.FC<{ linha: ClipeNaLinha[]; fps: number; de: number; quadros: number }> = ({
-  linha,
-  fps,
-  de,
-  quadros,
-}) => {
+const Avatar: React.FC<{
+  linha: ClipeNaLinha[];
+  fps: number;
+  de: number;
+  quadros: number;
+}> = ({ linha, fps, de, quadros }) => {
   const frame = useCurrentFrame();
-  const p = interpolate(frame, [TRANSICAO, TRANSICAO + 10, quadros - 10, quadros - 4], [0, 1, 1, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  const p = interpolate(
+    frame,
+    [TRANSICAO, TRANSICAO + 10, quadros - 10, quadros - 4],
+    [0, 1, 1, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
   return (
     <div
       style={{
@@ -128,7 +164,12 @@ const Avatar: React.FC<{ linha: ClipeNaLinha[]; fps: number; de: number; quadros
         scale: String(0.8 + 0.2 * p),
       }}
     >
-      <TrilhaVideo linha={linha} fps={fps} avatar={AVATAR} intervalo={[de, de + quadros]} />
+      <TrilhaVideo
+        linha={linha}
+        fps={fps}
+        avatar={AVATAR}
+        intervalo={[de, de + quadros]}
+      />
     </div>
   );
 };
@@ -162,47 +203,84 @@ export const VideoAulaYoutube: React.FC<DadosEdicao> = ({
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
   const linha = useMemo(() => montarLinha(clipes, fps), [clipes, fps]);
-  const palavrasLinha = useMemo(() => palavrasNaLinha(linha, fps, palavras), [linha, fps, palavras]);
+  const palavrasLinha = useMemo(
+    () => palavrasNaLinha(linha, fps, palavras),
+    [linha, fps, palavras],
+  );
   const cenasLinha = useMemo(
-    () => cenas.map((c) => ({ ...c, ...posicionar(linha, fps, c.ancora, c.duracao) })),
+    () =>
+      cenas.map((c) => ({
+        ...c,
+        ...posicionar(linha, fps, c.ancora, c.duracao),
+      })),
     [cenas, linha, fps],
   );
   const zoomsLinha = useMemo(
-    () => zooms.map((z) => ({ ...z, ...posicionar(linha, fps, z.ancora, z.duracao) })),
+    () =>
+      zooms.map((z) => ({
+        ...z,
+        ...posicionar(linha, fps, z.ancora, z.duracao),
+      })),
     [zooms, linha, fps],
   );
 
   const emCenaCheia = cenasLinha.some(
-    (c) => c.modo === "cheio" && frame >= c.de + TRANSICAO && frame < c.de + c.quadros - TRANSICAO,
+    (c) =>
+      c.modo === "cheio" &&
+      frame >= c.de + TRANSICAO &&
+      frame < c.de + c.quadros - TRANSICAO,
   );
-  const clipeAtual = linha.find((c) => frame >= c.de && frame < c.de + c.quadros);
+  const clipeAtual = linha.find(
+    (c) => frame >= c.de && frame < c.de + c.quadros,
+  );
 
   return (
     <AbsoluteFill style={{ backgroundColor: COR.fundo }}>
       {/* Esconde o vídeo (mantendo o áudio) enquanto uma cena cobre a tela toda. */}
       <AbsoluteFill style={{ opacity: emCenaCheia ? 0 : 1 }}>
-        <Palco linha={linha} fps={fps} zooms={zoomsLinha} />
+        <Palco
+          linha={linha}
+          fps={fps}
+          zooms={zoomsLinha}
+          marcacoes={cenasLinha.filter((c) => c.modo === "tela")}
+        />
       </AbsoluteFill>
-      {clipeAtual?.layout === "camera" && !emCenaCheia ? <Marca texto={marca} /> : null}
-      {cenasLinha.map((c) => {
-        const Render = c.render;
-        return (
-          <Sequence key={c.id} from={c.de} durationInFrames={c.quadros} name={c.id}>
-            <Html5Audio
-              src={staticFile(c.modo === "cheio" ? "sfx/whoosh.wav" : "sfx/pop.wav")}
-              volume={c.modo === "cheio" ? 0.28 : 0.22}
-            />
-            {c.modo === "cheio" ? (
-              <TransicaoCheia quadros={c.quadros}>
+      {clipeAtual?.layout === "camera" && !emCenaCheia ? (
+        <Marca texto={marca} />
+      ) : null}
+      {cenasLinha
+        .filter((c) => c.modo !== "tela")
+        .map((c) => {
+          const Render = c.render;
+          return (
+            <Sequence
+              key={c.id}
+              from={c.de}
+              durationInFrames={c.quadros}
+              name={c.id}
+            >
+              <Html5Audio
+                src={staticFile(
+                  c.modo === "cheio" ? "sfx/whoosh.wav" : "sfx/pop.wav",
+                )}
+                volume={c.modo === "cheio" ? 0.28 : 0.22}
+              />
+              {c.modo === "cheio" ? (
+                <TransicaoCheia quadros={c.quadros}>
+                  <Render />
+                  <Avatar
+                    linha={linha}
+                    fps={fps}
+                    de={c.de}
+                    quadros={c.quadros}
+                  />
+                </TransicaoCheia>
+              ) : (
                 <Render />
-                <Avatar linha={linha} fps={fps} de={c.de} quadros={c.quadros} />
-              </TransicaoCheia>
-            ) : (
-              <Render />
-            )}
-          </Sequence>
-        );
-      })}
+              )}
+            </Sequence>
+          );
+        })}
       {legendas ? <Legendas palavras={palavrasLinha} fps={fps} /> : null}
     </AbsoluteFill>
   );

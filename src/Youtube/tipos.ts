@@ -20,7 +20,9 @@ export type Palavra = { parte: Parte; w: string; s: number; e: number };
 // Âncora de tempo na gravação original; convertida para o tempo editado.
 export type Ancora = { parte: Parte; t: number };
 
-export type ModoCena = "cheio" | "sobreposto";
+// cheio: cobre a tela; sobreposto: por cima do vídeo; tela: desenhado sobre o
+// vídeo e acompanha o zoom (marcações em números da tela).
+export type ModoCena = "cheio" | "sobreposto" | "tela";
 
 export type Cena = {
   id: string;
