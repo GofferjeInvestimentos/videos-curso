@@ -639,14 +639,6 @@ export const cenas: Cena[] = [
     <Marcacao regiao={[512, 310, 200, 30]} />,
   ),
   cena(
-    "tims3-27",
-    P2,
-    26.6,
-    2.8,
-    "tela",
-    <Marcacao regiao={[424, 430, 206, 22]} />,
-  ),
-  cena(
     "tims3-18",
     P2,
     29.6,
