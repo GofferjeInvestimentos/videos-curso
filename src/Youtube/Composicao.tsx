@@ -1,10 +1,8 @@
 import { useMemo } from "react";
 import {
   AbsoluteFill,
-  Html5Audio,
   Sequence,
   interpolate,
-  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
@@ -93,7 +91,6 @@ const RenderCena: React.FC<{ cena: CenaNaLinha }> = ({ cena }) => {
   const Render = cena.render;
   return (
     <Sequence from={cena.de} durationInFrames={cena.quadros} name={cena.id}>
-      <Html5Audio src={staticFile("sfx/tick.wav")} volume={0.3} />
       <Render />
     </Sequence>
   );
@@ -264,12 +261,6 @@ export const VideoAulaYoutube: React.FC<DadosEdicao> = ({
               durationInFrames={c.quadros}
               name={c.id}
             >
-              <Html5Audio
-                src={staticFile(
-                  c.modo === "cheio" ? "sfx/whoosh.wav" : "sfx/pop.wav",
-                )}
-                volume={c.modo === "cheio" ? 0.28 : 0.22}
-              />
               {c.modo === "cheio" ? (
                 <TransicaoCheia quadros={c.quadros}>
                   <Render />
