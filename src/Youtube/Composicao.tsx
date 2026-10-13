@@ -1,8 +1,10 @@
 import { useMemo } from "react";
 import {
   AbsoluteFill,
+  Html5Audio,
   Sequence,
   interpolate,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
@@ -186,6 +188,10 @@ export const VideoAulaYoutube: React.FC<DadosEdicao> = ({
         const Render = c.render;
         return (
           <Sequence key={c.id} from={c.de} durationInFrames={c.quadros} name={c.id}>
+            <Html5Audio
+              src={staticFile(c.modo === "cheio" ? "sfx/whoosh.wav" : "sfx/pop.wav")}
+              volume={c.modo === "cheio" ? 0.28 : 0.22}
+            />
             {c.modo === "cheio" ? (
               <TransicaoCheia quadros={c.quadros}>
                 <Render />

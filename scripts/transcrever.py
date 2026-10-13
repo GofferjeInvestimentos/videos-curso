@@ -7,6 +7,9 @@ para o modelo acertar a grafia logo na primeira passada.
 """
 import json
 import sys
+import wave
+
+import numpy as np
 
 from faster_whisper import WhisperModel
 
@@ -21,9 +24,18 @@ VOCABULARIO = (
 audio, saida = sys.argv[1], sys.argv[2]
 modelo = sys.argv[3] if len(sys.argv) > 3 else "large-v3"
 
+
+def ler_wav(caminho):
+    """Lê WAV mono 16 kHz direto em numpy (evita depender do PyAV)."""
+    with wave.open(caminho) as w:
+        assert w.getframerate() == 16000 and w.getnchannels() == 1, "use WAV mono 16 kHz"
+        dados = w.readframes(w.getnframes())
+    return np.frombuffer(dados, dtype=np.int16).astype(np.float32) / 32768
+
+
 model = WhisperModel(modelo, device="cpu", compute_type="int8", cpu_threads=4)
 segments, info = model.transcribe(
-    audio,
+    ler_wav(audio),
     language="pt",
     beam_size=5,
     word_timestamps=True,
