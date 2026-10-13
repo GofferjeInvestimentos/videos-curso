@@ -1,7 +1,7 @@
 [
 {
 "parte": "parte1",
-"inicio": 0.3,
+"inicio": 0.27,
 "fim": 7.26,
 "layout": "camera",
 "zoom": 1
@@ -72,13 +72,13 @@
 {
 "parte": "parte1",
 "inicio": 71.47,
-"fim": 78.05,
+"fim": 77.98,
 "layout": "camera",
 "zoom": 1
 },
 {
 "parte": "parte1",
-"inicio": 80.99,
+"inicio": 80.92,
 "fim": 87.83,
 "layout": "camera",
 "zoom": 1.14
@@ -93,66 +93,30 @@
 {
 "parte": "parte1",
 "inicio": 96.367,
-"fim": 129.78,
+"fim": 164.31,
 "layout": "celular"
 },
 {
 "parte": "parte1",
-"inicio": 129.98,
-"fim": 164.33,
+"inicio": 165.1,
+"fim": 169.49,
 "layout": "celular"
 },
 {
 "parte": "parte1",
-"inicio": 165.07,
-"fim": 169.42,
+"inicio": 170.01,
+"fim": 172.0,
 "layout": "celular"
 },
 {
 "parte": "parte1",
-"inicio": 170.1,
-"fim": 171.91,
+"inicio": 172.07,
+"fim": 282.4,
 "layout": "celular"
 },
 {
 "parte": "parte1",
-"inicio": 172.17,
-"fim": 181.24,
-"layout": "celular"
-},
-{
-"parte": "parte1",
-"inicio": 181.61,
-"fim": 188.84,
-"layout": "celular"
-},
-{
-"parte": "parte1",
-"inicio": 189.26,
-"fim": 217.28,
-"layout": "celular"
-},
-{
-"parte": "parte1",
-"inicio": 217.72,
-"fim": 231.82,
-"layout": "celular"
-},
-{
-"parte": "parte1",
-"inicio": 232.28,
-"fim": 259.1,
-"layout": "celular"
-},
-{
-"parte": "parte1",
-"inicio": 259.7,
-"fim": 282.2,
-"layout": "celular"
-},
-{
-"parte": "parte1",
-"inicio": 283.28,
+"inicio": 283.01,
 "fim": 286.317,
 "layout": "camera",
 "zoom": 1.14
@@ -165,67 +129,31 @@
 },
 {
 "parte": "parte1",
-"inicio": 289.33,
-"fim": 304.04,
+"inicio": 289.31,
+"fim": 340.21,
 "layout": "tela"
 },
 {
 "parte": "parte1",
-"inicio": 304.34,
-"fim": 307.0,
-"layout": "tela"
-},
-{
-"parte": "parte1",
-"inicio": 307.46,
-"fim": 326.0,
-"layout": "tela"
-},
-{
-"parte": "parte1",
-"inicio": 326.2,
-"fim": 340.12,
-"layout": "tela"
-},
-{
-"parte": "parte1",
-"inicio": 341.16,
-"fim": 349.02,
-"layout": "tela"
-},
-{
-"parte": "parte1",
-"inicio": 349.24,
+"inicio": 341.0,
 "fim": 395.2,
 "layout": "tela"
 },
 {
 "parte": "parte1",
 "inicio": 395.2,
-"fim": 398.58,
+"fim": 403.38,
 "layout": "celular"
 },
 {
 "parte": "parte1",
-"inicio": 398.92,
-"fim": 403.08,
+"inicio": 404.19,
+"fim": 412.51,
 "layout": "celular"
 },
 {
 "parte": "parte1",
-"inicio": 404.22,
-"fim": 412.28,
-"layout": "celular"
-},
-{
-"parte": "parte1",
-"inicio": 414.08,
-"fim": 421.32,
-"layout": "celular"
-},
-{
-"parte": "parte1",
-"inicio": 421.62,
+"inicio": 413.83,
 "fim": 422.033,
 "layout": "celular"
 },
@@ -239,60 +167,36 @@
 {
 "parte": "parte1",
 "inicio": 429.05,
-"fim": 500.57,
+"fim": 500.76,
 "layout": "tela"
 },
 {
 "parte": "parte1",
-"inicio": 506.33,
-"fim": 514.12,
+"inicio": 506.45,
+"fim": 514.24,
 "layout": "tela"
 },
 {
 "parte": "parte2",
-"inicio": 3.01,
-"fim": 15.32,
+"inicio": 3.11,
+"fim": 15.63,
 "layout": "tela"
 },
 {
 "parte": "parte2",
-"inicio": 16.16,
-"fim": 18.58,
+"inicio": 16.13,
+"fim": 18.88,
 "layout": "tela"
 },
 {
 "parte": "parte2",
-"inicio": 19.41,
-"fim": 30.81,
-"layout": "tela"
-},
-{
-"parte": "parte2",
-"inicio": 31.13,
+"inicio": 19.35,
 "fim": 42.05,
 "layout": "tela"
 },
 {
 "parte": "parte2",
 "inicio": 42.05,
-"fim": 51.71,
-"layout": "celular"
-},
-{
-"parte": "parte2",
-"inicio": 52.13,
-"fim": 63.02,
-"layout": "celular"
-},
-{
-"parte": "parte2",
-"inicio": 63.22,
-"fim": 76.26,
-"layout": "celular"
-},
-{
-"parte": "parte2",
-"inicio": 76.48,
 "fim": 80.917,
 "layout": "celular"
 },
@@ -319,18 +223,12 @@
 {
 "parte": "parte2",
 "inicio": 169.767,
-"fim": 179.53,
+"fim": 179.74,
 "layout": "celular"
 },
 {
 "parte": "parte2",
-"inicio": 185.05,
-"fim": 203.09,
-"layout": "celular"
-},
-{
-"parte": "parte2",
-"inicio": 203.29,
+"inicio": 185.06,
 "fim": 204.133,
 "layout": "celular"
 },
@@ -365,13 +263,13 @@
 {
 "parte": "parte2",
 "inicio": 229.06,
-"fim": 236.08,
+"fim": 236.02,
 "layout": "camera",
 "zoom": 1
 },
 {
 "parte": "parte2",
-"inicio": 240.82,
+"inicio": 240.88,
 "fim": 248.94,
 "layout": "camera",
 "zoom": 1.14
@@ -379,77 +277,52 @@
 {
 "parte": "parte2",
 "inicio": 248.94,
-"fim": 252.59,
+"fim": 253.52,
 "layout": "camera",
 "zoom": 1
 },
 {
 "parte": "parte2",
-"inicio": 252.97,
-"fim": 253.54,
-"layout": "camera",
-"zoom": 1.14
-},
-{
-"parte": "parte2",
-"inicio": 254.8,
+"inicio": 254.83,
 "fim": 263.35,
 "layout": "camera",
-"zoom": 1
+"zoom": 1.14
 },
 {
 "parte": "parte2",
 "inicio": 263.35,
 "fim": 270.43,
 "layout": "camera",
-"zoom": 1.14
-},
-{
-"parte": "parte2",
-"inicio": 270.43,
-"fim": 278.98,
-"layout": "camera",
 "zoom": 1
 },
 {
 "parte": "parte2",
-"inicio": 283.133,
-"fim": 295.63,
+"inicio": 270.43,
+"fim": 279.19,
+"layout": "camera",
+"zoom": 1.14
+},
+{
+"parte": "parte2",
+"inicio": 283.16,
+"fim": 298.51,
 "layout": "celular"
 },
 {
 "parte": "parte2",
-"inicio": 295.99,
-"fim": 298.34,
+"inicio": 299.02,
+"fim": 300.88,
 "layout": "celular"
 },
 {
 "parte": "parte2",
-"inicio": 299.04,
-"fim": 300.82,
+"inicio": 303.37,
+"fim": 309.38,
 "layout": "celular"
 },
 {
 "parte": "parte2",
-"inicio": 303.41,
-"fim": 307.88,
-"layout": "celular"
-},
-{
-"parte": "parte2",
-"inicio": 308.38,
-"fim": 309.08,
-"layout": "celular"
-},
-{
-"parte": "parte2",
-"inicio": 310.72,
-"fim": 313.98,
-"layout": "celular"
-},
-{
-"parte": "parte2",
-"inicio": 314.28,
+"inicio": 310.69,
 "fim": 314.65,
 "layout": "celular"
 },
@@ -458,124 +331,117 @@
 "inicio": 314.65,
 "fim": 322.0,
 "layout": "camera",
-"zoom": 1.14
+"zoom": 1
 },
 {
 "parte": "parte2",
 "inicio": 322.0,
 "fim": 329.43,
 "layout": "camera",
-"zoom": 1
+"zoom": 1.14
 },
 {
 "parte": "parte2",
 "inicio": 329.43,
 "fim": 336.27,
 "layout": "camera",
-"zoom": 1.14
+"zoom": 1
 },
 {
 "parte": "parte2",
 "inicio": 336.27,
 "fim": 343.74,
 "layout": "camera",
-"zoom": 1
+"zoom": 1.14
 },
 {
 "parte": "parte2",
 "inicio": 343.74,
 "fim": 350.8,
 "layout": "camera",
-"zoom": 1.14
+"zoom": 1
 },
 {
 "parte": "parte2",
 "inicio": 350.8,
-"fim": 354.27,
-"layout": "camera",
-"zoom": 1
-},
-{
-"parte": "parte2",
-"inicio": 354.69,
-"fim": 361.93,
+"fim": 354.17,
 "layout": "camera",
 "zoom": 1.14
 },
 {
 "parte": "parte2",
-"inicio": 363.43,
-"fim": 371.67,
+"inicio": 354.79,
+"fim": 361.82,
 "layout": "camera",
 "zoom": 1
+},
+{
+"parte": "parte2",
+"inicio": 363.6,
+"fim": 371.67,
+"layout": "camera",
+"zoom": 1.14
 },
 {
 "parte": "parte2",
 "inicio": 371.67,
 "fim": 378.62,
 "layout": "camera",
-"zoom": 1.14
+"zoom": 1
 },
 {
 "parte": "parte2",
 "inicio": 378.62,
 "fim": 385.19,
 "layout": "camera",
-"zoom": 1
+"zoom": 1.14
 },
 {
 "parte": "parte2",
 "inicio": 385.19,
 "fim": 392.97,
 "layout": "camera",
-"zoom": 1.14
+"zoom": 1
 },
 {
 "parte": "parte2",
 "inicio": 392.97,
 "fim": 399.79,
 "layout": "camera",
-"zoom": 1
+"zoom": 1.14
 },
 {
 "parte": "parte2",
 "inicio": 399.79,
 "fim": 407.62,
 "layout": "camera",
-"zoom": 1.14
+"zoom": 1
 },
 {
 "parte": "parte2",
 "inicio": 407.62,
 "fim": 414.91,
 "layout": "camera",
-"zoom": 1
+"zoom": 1.14
 },
 {
 "parte": "parte2",
 "inicio": 414.91,
 "fim": 421.84,
 "layout": "camera",
-"zoom": 1.14
+"zoom": 1
 },
 {
 "parte": "parte2",
 "inicio": 421.84,
 "fim": 428.86,
 "layout": "camera",
-"zoom": 1
-},
-{
-"parte": "parte2",
-"inicio": 428.86,
-"fim": 434.76,
-"layout": "camera",
 "zoom": 1.14
 },
 {
 "parte": "parte2",
-"inicio": 435.06,
-"fim": 436.66,
+"inicio": 428.86,
+"fim": 436.73,
 "layout": "camera",
 "zoom": 1
 }

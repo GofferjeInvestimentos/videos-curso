@@ -5,7 +5,14 @@ import { CartaoAtivo } from "./cenas/CartaoAtivo";
 import { Comparacao } from "./cenas/Comparacao";
 import { GradeMetricas } from "./cenas/GradeMetricas";
 import { ListaNumerada } from "./cenas/ListaNumerada";
-import { CaixaTexto, Marcacao, NomeApresentador } from "./cenas/Sobreposicoes";
+import {
+  CaixaTexto,
+  CartaoLateral,
+  MarcaTexto,
+  Marcacao,
+  NomeApresentador,
+  SeloSecao,
+} from "./cenas/Sobreposicoes";
 import { TituloSecao } from "./cenas/TituloSecao";
 import { COR } from "./tema";
 import type { Cena, ModoCena, Parte } from "./tipos";
@@ -13,6 +20,11 @@ import type { Cena, ModoCena, Parte } from "./tipos";
 // Roteiro de edição: cada cena é ancorada num instante da gravação original
 // (parte + segundo, conferido na transcrição) e dura `duracao` segundos do
 // vídeo editado. Números vêm do que aparece na tela da gravação.
+//
+// Critério: quando a tela do computador ou do celular está aparecendo, ela é a
+// protagonista (zoom, círculo, marca-texto e cards laterais). Tela cheia de
+// motion só para conceitos, para consolidar informação ou para cobrir telas
+// vazias. Trechos importantes ficam só com o Fernando falando.
 
 const cena = (
   id: string,
@@ -41,7 +53,7 @@ const P1 = "parte1";
 const P2 = "parte2";
 
 export const cenas: Cena[] = [
-  // ── Abertura ─────────────────────────────────────────────
+  // ── Abertura (câmera) ───────────────────────────────────
   cena(
     "meta",
     P1,
@@ -84,7 +96,7 @@ export const cenas: Cena[] = [
     "carteira-publica",
     P1,
     43.8,
-    8.0,
+    7.8,
     "cheio",
     <GradeMetricas
       rotulo="Carteira pública"
@@ -117,7 +129,7 @@ export const cenas: Cena[] = [
     "fracionar",
     P1,
     60.0,
-    13.4,
+    8.5,
     "cheio",
     <Comparacao
       rotulo="Começando com menos"
@@ -136,77 +148,92 @@ export const cenas: Cena[] = [
           quando: 2.6,
         },
       ]}
-      conclusao="Ensinar a pescar: entenda o *racional*, não copie às cegas."
     />,
   ),
-  // ── Parte 1: carteira após 1 mês ────────────────────────
+  cena(
+    "racional",
+    P1,
+    86.2,
+    3.6,
+    "sobreposto",
+    <CaixaTexto texto="Entenda o *racional* — não copie às cegas" />,
+  ),
+  // ── Parte 1: carteira após 1 mês (celular) ──────────────
   cena(
     "titulo-1mes",
     P1,
     90.0,
-    6.4,
+    6.3,
     "cheio",
     <TituloSecao numero="Parte 1" titulo="Como está a *carteira* após 1 mês" />,
   ),
   cena(
+    "total-bruto",
+    P1,
+    105.4,
+    6.0,
+    "tela",
+    <MarcaTexto regiao={[17, 231, 150, 34]} fundo="escuro" />,
+  ),
+  cena(
     "resultado-1mes",
     P1,
-    101.0,
-    13.5,
-    "cheio",
-    <GradeMetricas
-      rotulo="Carteira pública · Nubank"
-      titulo="Resultado em *1 mês*"
-      metricas={[
+    106.0,
+    9.0,
+    "sobreposto",
+    <CartaoLateral
+      etiqueta="Carteira pública · 1 mês"
+      titulo="*+21%* desde a criação"
+      topo={600}
+      linhas={[
         { rotulo: "Aporte inicial", valor: 1000, prefixo: "R$ " },
         {
           rotulo: "Total bruto hoje",
           valor: 1215.58,
           casas: 2,
           prefixo: "R$ ",
-          quando: 4.6,
         },
-        {
-          rotulo: "Rentabilidade",
-          valor: 21,
-          prefixo: "+",
-          sufixo: "%",
-          cor: COR.verde,
-          quando: 5.5,
-        },
+        { rotulo: "Bolsa", texto: "81,7%" },
+        { rotulo: "Tesouro Direto", texto: "18,3%" },
       ]}
-      rodape="Bolsa *81,7%* · Tesouro Direto *18,3%*"
     />,
   ),
   cena(
-    "marcacao-mercado",
+    "marcacao-caixa",
     P1,
     126.3,
-    9.5,
-    "cheio",
-    <Atencao
-      icone="%"
-      titulo="Ganho na *marcação a mercado*"
-      texto="Tesouro Prefixado com Juros Semestrais 2037: de *R$ 196,01* para *R$ 222,06* — *+13,29%* em um mês."
-      cor={COR.verde}
+    6.5,
+    "sobreposto",
+    <CaixaTexto
+      texto="Ganho na *marcação a mercado*"
+      apoio="Tesouro Prefixado 2037"
+      posicao="direita"
     />,
+  ),
+  cena(
+    "tesouro-valorizacao",
+    P1,
+    130.6,
+    6.0,
+    "tela",
+    <MarcaTexto regiao={[17, 345, 408, 30]} fundo="escuro" />,
   ),
   cena(
     "por-que-valorizou",
     P1,
-    136.0,
-    15.0,
+    136.9,
+    14.2,
     "cheio",
     <ListaNumerada
-      rotulo="Renda fixa também oscila"
-      titulo="Por que o título *valorizou*?"
+      rotulo="Marcação a mercado"
+      titulo="Por que o título *valorizou 13%* em um mês?"
       itens={[
         { titulo: "Título prefixado *longo* (vence em 2037)", quando: 0.3 },
-        { titulo: "*Duration* maior = mais sensível aos juros", quando: 3.6 },
-        { titulo: "Juros caem → o título *se valoriza*", quando: 6.2 },
+        { titulo: "*Duration* maior = mais sensível aos juros", quando: 2.7 },
+        { titulo: "Juros caem → o título *se valoriza*", quando: 5.3 },
         {
           titulo: "Vendendo antes do prazo, você *embolsa o ganho*",
-          quando: 10.9,
+          quando: 10.0,
         },
       ]}
     />,
@@ -217,20 +244,31 @@ export const cenas: Cena[] = [
     155.0,
     7.0,
     "sobreposto",
-    <CaixaTexto texto="*13% em 1 mês* ≈ o que o título paga em *1 ano*" />,
+    <CaixaTexto
+      texto="*13% em 1 mês* ≈ o que o título paga em *1 ano*"
+      posicao="direita"
+    />,
+  ),
+  cena(
+    "bpac11-valorizacao",
+    P1,
+    180.6,
+    5.8,
+    "tela",
+    <MarcaTexto regiao={[18, 790, 394, 26]} fundo="escuro" />,
   ),
   cena(
     "bpac11",
     P1,
-    174.6,
-    14.5,
-    "cheio",
-    <CartaoAtivo
+    175.0,
+    13.5,
+    "sobreposto",
+    <CartaoLateral
       etiqueta="Ação · Banco"
-      ticker="BPAC11"
-      nome="Banco BTG Pactual"
-      metricas={[
-        { rotulo: "Quantidade", valor: 4, sufixo: " ações" },
+      titulo="BPAC11 · *+50,36%*"
+      topo={600}
+      linhas={[
+        { rotulo: "Quantidade", texto: "4 ações" },
         { rotulo: "Preço médio", valor: 53.79, casas: 2, prefixo: "R$ " },
         { rotulo: "Cotação atual", valor: 80.99, casas: 2, prefixo: "R$ " },
         {
@@ -255,6 +293,7 @@ export const cenas: Cena[] = [
       texto="BPAC11: *mantém*, mas sem novas compras"
       apoio="Subiu muito no curto prazo"
       cor={COR.amarelo}
+      posicao="direita"
     />,
   ),
   cena(
@@ -309,7 +348,7 @@ export const cenas: Cena[] = [
     "resumo-1mes",
     P1,
     269.2,
-    8.8,
+    8.6,
     "cheio",
     <Barras
       rotulo="Carteira após 1 mês"
@@ -340,12 +379,12 @@ export const cenas: Cena[] = [
       nota="Neste aporte: *nenhuma recompra* — só ativos novos, com foco em renda variável."
     />,
   ),
-  // ── Parte 2: compras do mês — TRXF11 ────────────────────
+  // ── Parte 2: compras do mês — TRXF11 (tela) ─────────────
   cena(
     "titulo-compras",
     P1,
     278.1,
-    8.0,
+    6.0,
     "cheio",
     <TituloSecao
       numero="Parte 2"
@@ -354,16 +393,15 @@ export const cenas: Cena[] = [
     />,
   ),
   cena(
-    "titulo-trxf11",
+    "selo-trxf11",
     P1,
     299.5,
-    5.0,
-    "cheio",
-    <TituloSecao
+    6.0,
+    "sobreposto",
+    <SeloSecao
       numero="Compra 1 · Fundo imobiliário"
-      titulo="*TRXF11*"
+      titulo="TRXF11"
       subtitulo="TRX Real Estate"
-      corDestaque={COR.verde}
     />,
   ),
   cena(
@@ -375,10 +413,18 @@ export const cenas: Cena[] = [
     <Marcacao regiao={[447, 296, 232, 88]} />,
   ),
   cena(
-    "trxf11-queda",
+    "trxf11-variacao",
     P1,
     320.3,
-    8.3,
+    2.8,
+    "tela",
+    <Marcacao regiao={[1290, 296, 160, 88]} />,
+  ),
+  cena(
+    "trxf11-queda",
+    P1,
+    323.4,
+    5.2,
     "cheio",
     <GradeMetricas
       rotulo="TRXF11"
@@ -390,7 +436,7 @@ export const cenas: Cena[] = [
           valor: 71.88,
           casas: 2,
           prefixo: "R$ ",
-          quando: 1.0,
+          quando: 0.6,
         },
         {
           rotulo: "Variação 12 meses",
@@ -398,32 +444,29 @@ export const cenas: Cena[] = [
           casas: 2,
           sufixo: "%",
           cor: COR.vermelho,
-          quando: 2.6,
+          quando: 1.4,
         },
       ]}
-      rodape="P/VP de *0,75*: o menor da série histórica"
     />,
   ),
   cena(
     "trxf11-pvp",
     P1,
-    330.0,
-    2.2,
+    329.6,
+    2.6,
     "tela",
-    <Marcacao regiao={[490, 520, 960, 40]} />,
+    <MarcaTexto regiao={[492, 523, 958, 36]} />,
   ),
   cena(
     "trxf11-ficha",
     P1,
     332.2,
     9.0,
-    "cheio",
-    <CartaoAtivo
+    "sobreposto",
+    <CartaoLateral
       etiqueta="FII · Compra do mês"
-      ticker="TRXF11"
-      nome="TRX Real Estate"
-      corDestaque={COR.verde}
-      metricas={[
+      titulo="TRXF11"
+      linhas={[
         { rotulo: "Cotação", valor: 71.88, casas: 2, prefixo: "R$ " },
         {
           rotulo: "Dividend yield (12m)",
@@ -432,7 +475,7 @@ export const cenas: Cena[] = [
           sufixo: "%",
           cor: COR.verde,
         },
-        { rotulo: "P/VP", valor: 0.75, casas: 2 },
+        { rotulo: "P/VP", valor: 0.75, casas: 2, cor: COR.verde },
         {
           rotulo: "Aporte",
           valor: 200,
@@ -447,15 +490,20 @@ export const cenas: Cena[] = [
     "trxf11-tese",
     P1,
     347.9,
-    13.6,
-    "cheio",
-    <ListaNumerada
-      rotulo="TRXF11"
-      titulo="Por que *continua bom*?"
-      itens={[
-        { titulo: "Excelentes *imóveis*", quando: 0.3 },
-        { titulo: "Excelentes *inquilinos*", quando: 5.9 },
-        { titulo: "Gestão não mudou *da noite para o dia*", quando: 8.5 },
+    13.4,
+    "sobreposto",
+    <CartaoLateral
+      etiqueta="TRXF11"
+      titulo="Por que *continua bom*"
+      linhas={[
+        { rotulo: "Imóveis", texto: "excelentes", cor: COR.verde, quando: 0.3 },
+        {
+          rotulo: "Inquilinos",
+          texto: "excelentes",
+          cor: COR.verde,
+          quando: 5.9,
+        },
+        { rotulo: "Gestão", texto: "sem mudança brusca", quando: 8.5 },
       ]}
       rodape="Tanto desconto que *gera oportunidade*"
     />,
@@ -479,13 +527,13 @@ export const cenas: Cena[] = [
   cena(
     "relatorio",
     P1,
-    384.0,
-    9.1,
+    386.0,
+    7.1,
     "cheio",
     <Atencao
       icone="i"
       titulo="Leia o *relatório gerencial*"
-      texto="É nele que você acompanha os grandes números do fundo: imóveis, inquilinos, vacância e dividendos."
+      texto="É nele que você acompanha os grandes números do fundo."
       cor={COR.azul}
     />,
   ),
@@ -509,18 +557,17 @@ export const cenas: Cena[] = [
     "sobreposto",
     <CaixaTexto texto="*TRXF11 comprado*" posicao="direita" />,
   ),
-  // ── TIMS3 ───────────────────────────────────────────────
+  // ── TIMS3 (tela) ────────────────────────────────────────
   cena(
-    "titulo-tims3",
+    "selo-tims3",
     P1,
     437.3,
-    9.0,
-    "cheio",
-    <TituloSecao
+    7.0,
+    "sobreposto",
+    <SeloSecao
       numero="Compra 2 · Ação"
-      titulo="*TIMS3*"
+      titulo="TIMS3"
       subtitulo="TIM: a telecom que ficou de lado na alta da Bolsa"
-      corDestaque={COR.verde}
     />,
   ),
   cena(
@@ -535,12 +582,12 @@ export const cenas: Cena[] = [
     "tims3-guidance",
     P1,
     459.0,
-    9.6,
-    "cheio",
-    <GradeMetricas
-      rotulo="TIMS3 · Dividendos"
-      titulo="O *guidance* de dividendos"
-      metricas={[
+    10.0,
+    "sobreposto",
+    <CartaoLateral
+      etiqueta="TIMS3 · Dividendos"
+      titulo="O *guidance*"
+      linhas={[
         { rotulo: "Dividend yield hoje", valor: 8.16, casas: 2, sufixo: "%" },
         {
           rotulo: "Expectativa (guidance)",
@@ -550,7 +597,7 @@ export const cenas: Cena[] = [
           quando: 7.6,
         },
       ]}
-      rodape="Fonte: relatório da empresa citado no vídeo"
+      rodape="Segundo o relatório da empresa"
     />,
   ),
   cena(
@@ -575,15 +622,7 @@ export const cenas: Cena[] = [
     478.0,
     1.6,
     "tela",
-    <Marcacao regiao={[632, 402, 92, 46]} cor="#F59E0B" />,
-  ),
-  cena(
-    "tims3-pvp",
-    P1,
-    479.5,
-    1.6,
-    "tela",
-    <Marcacao regiao={[965, 402, 92, 46]} cor="#F59E0B" />,
+    <MarcaTexto regiao={[466, 404, 650, 42]} />,
   ),
   cena(
     "unifique",
@@ -595,7 +634,6 @@ export const cenas: Cena[] = [
       texto="Unifique: fechamento de capital com *OPA a R$ 6* por ação"
       apoio="Posição já vendida em outra carteira"
       cor={COR.azul}
-      posicao="direita"
     />,
   ),
   cena(
@@ -603,33 +641,20 @@ export const cenas: Cena[] = [
     P1,
     494.6,
     9.5,
-    "cheio",
-    <CartaoAtivo
-      etiqueta="Ação · Telecom"
-      ticker="TIMS3"
-      nome="TIM"
-      corDestaque={COR.verde}
-      metricas={[
+    "sobreposto",
+    <CartaoLateral
+      etiqueta="Ação · Telecom · Compra do mês"
+      titulo="TIMS3"
+      linhas={[
         { rotulo: "Cotação", valor: 18.03, casas: 2, prefixo: "R$ " },
-        {
-          rotulo: "Dividend yield",
-          valor: 8.16,
-          casas: 2,
-          sufixo: "%",
-          nota: "guidance: 12%",
-        },
+        { rotulo: "Dividend yield", valor: 8.16, casas: 2, sufixo: "%" },
         { rotulo: "ROIC", valor: 30.27, casas: 2, sufixo: "%", cor: COR.verde },
-        {
-          rotulo: "P/L",
-          valor: 21.68,
-          casas: 2,
-          cor: COR.amarelo,
-          nota: "um pouco esticado",
-        },
+        { rotulo: "P/L", valor: 21.68, casas: 2, cor: COR.amarelo },
       ]}
+      rodape="Barata, com caixa líquido e guidance de *12%* em dividendos"
     />,
   ),
-  // ── TIMS3 (continuação no Google Finanças) ──────────────
+  // ── TIMS3 no Google Finanças (tela) e compra (celular) ──
   cena(
     "tims3-6m",
     P2,
@@ -652,10 +677,7 @@ export const cenas: Cena[] = [
     31.2,
     4.6,
     "sobreposto",
-    <CaixaTexto
-      texto="TIMS3 ficou para trás enquanto o mercado *subiu*"
-      posicao="esquerda"
-    />,
+    <CaixaTexto texto="TIMS3 ficou para trás enquanto o mercado *subiu*" />,
   ),
   cena(
     "tims3-aporte",
@@ -666,7 +688,6 @@ export const cenas: Cena[] = [
     <CaixaTexto
       texto="Aporte: *R$ 300* em TIMS3"
       apoio="Pagadora de dividendos"
-      posicao="esquerda"
     />,
   ),
   cena(
@@ -711,7 +732,7 @@ export const cenas: Cena[] = [
     "peter-lynch",
     P2,
     109.4,
-    10.0,
+    9.5,
     "cheio",
     <Atencao
       icone="“"
@@ -724,20 +745,17 @@ export const cenas: Cena[] = [
     "vulc3-marcas",
     P2,
     121.0,
-    17.8,
-    "cheio",
-    <ListaNumerada
-      rotulo="VULC3 · Vulcabras"
-      titulo="O que a *Vulcabras* produz no Brasil"
-      itens={[
-        {
-          titulo: "*Olympikus* — tênis de corrida com ótimo custo-benefício",
-          quando: 4.3,
-        },
-        { titulo: "*Mizuno*", quando: 11.2 },
-        { titulo: "*Under Armour*", quando: 12.5 },
+    13.0,
+    "sobreposto",
+    <CartaoLateral
+      etiqueta="VULC3 · Vulcabras"
+      titulo="Fabrica no *Brasil*"
+      linhas={[
+        { rotulo: "Olympikus", texto: "corrida", cor: COR.verde, quando: 4.3 },
+        { rotulo: "Mizuno", texto: "produção local", quando: 11.2 },
+        { rotulo: "Under Armour", texto: "produção local", quando: 12.5 },
       ]}
-      rodape="Grande parte da *produção de calçados* do Brasil"
+      rodape="Grande parte da *produção de calçados* do país"
     />,
   ),
   cena(
@@ -746,10 +764,7 @@ export const cenas: Cena[] = [
     139.0,
     3.0,
     "sobreposto",
-    <CaixaTexto
-      texto="Juros caindo → *varejo* tende a subir"
-      posicao="esquerda"
-    />,
+    <CaixaTexto texto="Juros caindo → *varejo* tende a subir" />,
   ),
   cena(
     "vulc3-roe",
@@ -763,23 +778,23 @@ export const cenas: Cena[] = [
     "vulc3-margem",
     P2,
     147.0,
-    3.2,
+    2.2,
     "tela",
     <Marcacao regiao={[632, 802, 112, 46]} />,
   ),
   cena(
     "vulc3-divida",
     P2,
-    148.8,
+    149.3,
     3.6,
     "tela",
-    <Marcacao regiao={[466, 658, 92, 46]} />,
+    <MarcaTexto regiao={[466, 660, 980, 42]} />,
   ),
   cena(
     "vulc3-max",
     P2,
     159.0,
-    2.0,
+    1.5,
     "tela",
     <Marcacao regiao={[914, 364, 108, 82]} />,
   ),
@@ -856,36 +871,26 @@ export const cenas: Cena[] = [
     P2,
     195.7,
     7.4,
-    "cheio",
-    <Barras
-      rotulo="Aporte do mês"
-      titulo="Até aqui: *R$ 800* investidos"
-      maximo={300}
-      barras={[
-        {
-          rotulo: "TRXF11 · fundo imobiliário",
-          valor: 200,
-          texto: "R$ 200",
-          cor: COR.verde,
-        },
-        { rotulo: "TIMS3 · TIM", valor: 300, texto: "R$ 300", cor: COR.verde },
-        {
-          rotulo: "VULC3 · Vulcabras",
-          valor: 300,
-          texto: "R$ 300",
-          cor: COR.verde,
-        },
+    "sobreposto",
+    <CartaoLateral
+      etiqueta="Aporte do mês"
+      titulo="Até aqui: *R$ 800*"
+      topo={170}
+      linhas={[
+        { rotulo: "TRXF11", valor: 200, prefixo: "R$ ", quando: 0.6 },
+        { rotulo: "TIMS3", valor: 300, prefixo: "R$ ", quando: 1.5 },
+        { rotulo: "VULC3", valor: 300, prefixo: "R$ ", quando: 2.4 },
         {
           rotulo: "Falta investir",
           valor: 200,
-          texto: "R$ 200",
-          cor: COR.azul,
+          prefixo: "R$ ",
+          cor: COR.azulClaro,
           quando: 4.4,
         },
       ]}
     />,
   ),
-  // ── Banco Inter (BDR) ───────────────────────────────────
+  // ── Banco Inter (câmera) ────────────────────────────────
   cena(
     "titulo-inter",
     P2,
@@ -903,19 +908,32 @@ export const cenas: Cena[] = [
     "inter-tese",
     P2,
     209.2,
-    22.4,
-    "cheio",
-    <ListaNumerada
-      rotulo="Banco Inter"
-      titulo="A tese do *Banco Inter*"
-      itens={[
+    22.0,
+    "sobreposto",
+    <CartaoLateral
+      etiqueta="Banco Inter"
+      titulo="A *tese*"
+      topo={150}
+      linhas={[
         {
-          titulo: "Inadimplência pode *cair* com a economia melhorando",
+          rotulo: "Inadimplência",
+          texto: "pode cair",
+          cor: COR.verde,
           quando: 0.3,
         },
-        { titulo: "*ROE* tende a crescer cada vez mais", quando: 8.1 },
-        { titulo: "Crescimento *trimestre após trimestre*", quando: 13.8 },
-        { titulo: "2º tri/2026: *melhor resultado da história*", quando: 17.4 },
+        {
+          rotulo: "ROE",
+          texto: "tende a crescer",
+          cor: COR.verde,
+          quando: 8.1,
+        },
+        { rotulo: "Resultados", texto: "tri após tri", quando: 13.8 },
+        {
+          rotulo: "2º tri/2026",
+          texto: "recorde",
+          cor: COR.verde,
+          quando: 17.4,
+        },
       ]}
     />,
   ),
@@ -930,13 +948,28 @@ export const cenas: Cena[] = [
   cena(
     "inter-codigo",
     P2,
-    245.0,
-    13.5,
+    249.0,
+    9.5,
     "cheio",
-    <Atencao
-      icone="!"
-      titulo="Atenção ao *código*"
-      texto="Na compra, o código ainda é *INBR32*. Depois da mudança, vira um novo BDR *não patrocinado* — confira o código na sua corretora."
+    <Comparacao
+      rotulo="Atenção ao código"
+      titulo="O BDR do Inter *vai mudar de código*"
+      colunas={[
+        {
+          topo: "Na compra de hoje",
+          titulo: "INBR32",
+          linhas: ["BDR atual"],
+          cor: COR.amarelo,
+        },
+        {
+          topo: "Depois da mudança",
+          titulo: "INBR34",
+          linhas: ["Novo BDR não patrocinado"],
+          cor: COR.verde,
+          quando: 4.1,
+        },
+      ]}
+      conclusao="Se você comprar antes, *peça a troca do código* na sua corretora."
     />,
   ),
   cena(
@@ -990,12 +1023,12 @@ export const cenas: Cena[] = [
     "sobreposto",
     <CaixaTexto texto="*Banco Inter comprado*" posicao="direita" />,
   ),
-  // ── Fechamento ──────────────────────────────────────────
+  // ── Fechamento (câmera) ─────────────────────────────────
   cena(
     "aporte-final",
     P2,
     314.4,
-    12.0,
+    10.0,
     "cheio",
     <Barras
       rotulo="Aporte do mês concluído"
@@ -1028,24 +1061,23 @@ export const cenas: Cena[] = [
   cena(
     "sem-renda-fixa",
     P2,
-    331.8,
-    12.6,
+    336.3,
+    8.2,
     "cheio",
     <GradeMetricas
       rotulo="E a renda fixa?"
-      titulo="Por que *não* comprei renda fixa agora"
+      titulo="Os juros futuros *derreteram*"
       metricas={[
         { rotulo: "DI 2032 · semana passada", valor: 14, sufixo: "%" },
         {
           rotulo: "DI 2032 · hoje",
           valor: 12,
-          prefixo: "~",
           sufixo: "%",
           cor: COR.amarelo,
-          quando: 10.1,
+          quando: 5.6,
         },
       ]}
-      rodape="Os juros futuros *derreteram* — espero um novo momento para voltar"
+      rodape="Por isso, sem renda fixa neste aporte"
     />,
   ),
   cena(
@@ -1068,7 +1100,7 @@ export const cenas: Cena[] = [
     "value-investing",
     P2,
     376.6,
-    10.0,
+    8.5,
     "cheio",
     <Comparacao
       rotulo="Value Investing"
@@ -1092,24 +1124,14 @@ export const cenas: Cena[] = [
     />,
   ),
   cena(
-    "ainda-baratas",
-    P2,
-    396.6,
-    6.4,
-    "sobreposto",
-    <CaixaTexto texto="Mesmo com a alta, as ações compradas *ainda estão baratas*" />,
-  ),
-  cena(
     "anote-value",
     P2,
     413.5,
     8.7,
-    "cheio",
-    <Atencao
-      icone="✓"
-      titulo="Anote: *Value Investing*"
-      texto="Comprar empresas que ainda estão baratas — e que o mercado *ainda não está olhando*."
-      cor={COR.verde}
+    "sobreposto",
+    <CaixaTexto
+      texto="Anote: *Value Investing*"
+      apoio="Empresas baratas que o mercado ainda não está olhando"
     />,
   ),
   cena(
@@ -1134,19 +1156,24 @@ export const cenas: Cena[] = [
 ];
 
 export const zooms: ZoomTela[] = [
+  // Celular: aproxima a parte de cima ou de baixo da tela do app.
+  zoom(P1, 104.0, 8.0, [0, 60, 900, 506], 1.5),
   zoom(P1, 117.0, 9.0, [0, 60, 900, 506], 1.5),
+  zoom(P1, 130.0, 6.8, [0, 60, 900, 506], 1.5),
+  zoom(P1, 180.0, 7.0, [0, 520, 900, 506], 1.5),
   zoom(P1, 189.5, 17.0, [0, 60, 900, 506], 1.5),
   zoom(P1, 404.0, 5.0, [0, 520, 900, 506], 1.5),
-  zoom(P1, 313.8, 5.4, [440, 200, 1040, 200], 1.6),
-  zoom(P1, 450.8, 6.8, [540, 200, 860, 240], 1.6),
-  zoom(P1, 470.0, 11.2, [440, 330, 1040, 480], 1.5),
-  zoom(P2, 18.6, 12.4, [400, 230, 820, 420], 1.6),
-  zoom(P2, 98.6, 4.2, [440, 400, 1040, 480], 1.5),
-  zoom(P2, 102.9, 4.0, [595, 130, 750, 450], 1.6),
-  zoom(P2, 142.6, 10.0, [440, 400, 1040, 480], 1.5),
-  zoom(P2, 158.6, 8.0, [460, 340, 1000, 120], 1.6),
   zoom(P2, 42.6, 12.0, [0, 60, 900, 506], 1.5),
   zoom(P2, 63.0, 8.0, [0, 520, 900, 506], 1.5),
   zoom(P2, 182.0, 8.0, [0, 520, 900, 506], 1.5),
   zoom(P2, 300.5, 9.0, [0, 520, 900, 506], 1.5),
+  // Sites: aproxima os números que estão sendo comentados.
+  zoom(P1, 313.8, 9.0, [440, 200, 1040, 200], 1.6),
+  zoom(P1, 450.8, 6.8, [540, 200, 860, 240], 1.6),
+  zoom(P1, 470.0, 10.0, [440, 330, 1040, 480], 1.5),
+  zoom(P2, 18.6, 12.4, [400, 230, 820, 420], 1.6),
+  zoom(P2, 98.6, 4.2, [440, 400, 1040, 480], 1.5),
+  zoom(P2, 102.9, 4.0, [595, 130, 750, 450], 1.6),
+  zoom(P2, 142.6, 10.5, [440, 400, 1040, 480], 1.5),
+  zoom(P2, 158.6, 7.5, [460, 340, 1000, 120], 1.6),
 ];

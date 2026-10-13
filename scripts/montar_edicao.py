@@ -12,14 +12,17 @@ Gera src/Youtube/dados/clipes.json e src/Youtube/dados/palavras.json.
 import json
 import os
 import sys
+import wave
+
+import numpy as np
 
 A = sys.argv[1]
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARTES = ["parte1", "parte2"]
 
-PAUSA_MAX = 0.45      # pausas maiores que isso viram corte seco
-FOLGA_ANTES = 0.10    # respiro antes da primeira palavra de um trecho
-FOLGA_DEPOIS = 0.16   # respiro depois da última palavra
+PAUSA_MAX = 0.9       # só pausas longas viram corte seco; as curtas ficam (fala natural)
+FOLGA_ANTES = 0.25    # respiro antes da primeira palavra de um trecho
+FOLGA_DEPOIS = 0.35   # respiro depois da última palavra
 TROCA_ENQUADRAMENTO = 7.0  # segundos máximos no mesmo zoom em planos de câmera
 ZOOM_FECHADO = 1.14
 
@@ -105,6 +108,32 @@ for parte in [p for p in PARTES if os.path.exists(f"{A}/{p}.palavras.json")]:
         clipes.append({"parte": parte, "inicio": round(inicio, 3), "fim": round(e, 3), "layout": "camera", "zoom": ZOOM_FECHADO if zoom_fechado else 1})
         zoom_fechado = not zoom_fechado
     todas_palavras += [{"parte": parte, "w": p["w"], "s": p["s"], "e": p["e"]} for p in palavras]
+
+# 5. Ajusta cada ponta de corte para o ponto mais silencioso por perto, para não
+#    morder o fim nem o começo de uma palavra.
+energia = {}
+for parte in {c["parte"] for c in clipes}:
+    with wave.open(f"{A}/{parte}.wav") as w:
+        x = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32)
+    jan = 160  # 10 ms a 16 kHz
+    energia[parte] = np.sqrt((x[: len(x) // jan * jan].reshape(-1, jan) ** 2).mean(1))
+
+
+def silencio_perto(parte, t, raio=0.12):
+    e = energia[parte]
+    a, b = max(0, int((t - raio) * 100)), min(len(e), int((t + raio) * 100) + 1)
+    if b <= a:
+        return t
+    return (a + int(np.argmin(e[a:b]))) / 100
+
+
+for i, c in enumerate(clipes):
+    juntos_antes = i > 0 and clipes[i - 1]["parte"] == c["parte"] and abs(clipes[i - 1]["fim"] - c["inicio"]) < 1e-6
+    if not juntos_antes:
+        c["inicio"] = round(silencio_perto(c["parte"], c["inicio"]), 3)
+    juntos_depois = i + 1 < len(clipes) and clipes[i + 1]["parte"] == c["parte"] and abs(clipes[i + 1]["inicio"] - c["fim"]) < 1e-6
+    if not juntos_depois:
+        c["fim"] = round(silencio_perto(c["parte"], c["fim"]), 3)
 
 dados = os.path.join(RAIZ, "src", "Youtube", "dados")
 os.makedirs(dados, exist_ok=True)

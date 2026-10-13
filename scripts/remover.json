@@ -1,86 +1,86 @@
 [
  {
   "parte": "parte1",
-  "de": 78.05,
-  "ate": 80.99,
+  "de": 78.09,
+  "ate": 81.04,
   "motivo": "frase repetida"
  },
  {
   "parte": "parte1",
-  "de": 164.33,
-  "ate": 165.07,
+  "de": 164.39,
+  "ate": 165.03,
   "motivo": "troca de palavra (seguinte/anterior)"
  },
  {
   "parte": "parte1",
-  "de": 171.91,
-  "ate": 172.17,
+  "de": 171.89,
+  "ate": 172.19,
   "motivo": "palavra repetida"
  },
  {
   "parte": "parte1",
   "de": 287.07,
-  "ate": 289.33,
+  "ate": 289.34,
   "motivo": "menciona pouca edição"
  },
  {
   "parte": "parte1",
-  "de": 500.57,
-  "ate": 506.33,
+  "de": 500.66,
+  "ate": 506.37,
   "motivo": "frase repetida"
  },
  {
   "parte": "parte2",
   "de": 0.0,
-  "ate": 3.01,
+  "ate": 2.99,
   "motivo": "repete o fim da parte 1"
  },
  {
   "parte": "parte2",
-  "de": 179.53,
-  "ate": 185.05,
+  "de": 179.62,
+  "ate": 184.95,
   "motivo": "pausa na compra"
  },
  {
   "parte": "parte2",
-  "de": 236.08,
-  "ate": 240.82,
+  "de": 236.09,
+  "ate": 240.76,
   "motivo": "frase abandonada"
  },
  {
   "parte": "parte2",
-  "de": 253.54,
-  "ate": 254.8,
+  "de": 253.56,
+  "ate": 254.85,
   "motivo": "instrução ao editor"
  },
  {
   "parte": "parte2",
-  "de": 278.98,
-  "ate": 283.04,
+  "de": 279.07,
+  "ate": 283.09,
   "motivo": "hesitação"
  },
  {
   "parte": "parte2",
-  "de": 298.34,
-  "ate": 299.04,
+  "de": 298.41,
+  "ate": 298.94,
   "motivo": "interjeição"
  },
  {
   "parte": "parte2",
-  "de": 300.82,
-  "ate": 303.41,
+  "de": 300.91,
+  "ate": 303.31,
   "motivo": "interjeição"
  },
  {
   "parte": "parte2",
-  "de": 354.27,
-  "ate": 354.69,
+  "de": 354.29,
+  "ate": 354.74,
   "motivo": "frase abandonada"
  },
  {
   "parte": "parte2",
-  "de": 361.93,
-  "ate": 363.43,
+  "de": 361.94,
+  "ate": 363.48,
   "motivo": "frase abandonada"
  }
 ]

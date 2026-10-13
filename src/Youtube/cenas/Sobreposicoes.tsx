@@ -1,6 +1,11 @@
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import {
+  AbsoluteFill,
+  interpolate,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { COR, FONTE_TEXTO, FONTE_TITULO } from "../tema";
-import { TextoComDestaque, useEntrada, useSaida } from "./base";
+import { Contador, TextoComDestaque, useEntrada, useSaida } from "./base";
 
 // Círculo vermelho "à mão" sobre um número na tela. Região em pixels do quadro.
 export const Marcacao: React.FC<{
@@ -150,6 +155,251 @@ export const NomeApresentador: React.FC<{ nome: string; cargo: string }> = ({
         >
           {cargo}
         </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// Marca-texto amarelo varrendo da esquerda para a direita sobre um trecho da tela.
+// `fundo` escuro (app do celular) usa transparência; claro (sites) usa multiply.
+export const MarcaTexto: React.FC<{
+  regiao: [number, number, number, number];
+  fundo?: "claro" | "escuro";
+  atraso?: number;
+}> = ({ regiao, fundo = "claro", atraso = 0 }) => {
+  const frame = useCurrentFrame();
+  const saida = useSaida(8);
+  const [x, y, w, h] = regiao;
+  const p = interpolate(frame - atraso, [0, 12], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: (t) => 1 - Math.pow(1 - t, 2),
+  });
+  return (
+    <AbsoluteFill style={{ opacity: saida }}>
+      <div
+        style={{
+          position: "absolute",
+          left: x - 6,
+          top: y - 3,
+          width: (w + 12) * p,
+          height: h + 6,
+          borderRadius: 4,
+          backgroundColor:
+            fundo === "claro" ? "#FDE047" : "rgba(250,204,21,0.32)",
+          mixBlendMode: fundo === "claro" ? "multiply" : "normal",
+          boxShadow:
+            fundo === "escuro" ? "0 0 0 2px rgba(250,204,21,0.85)" : undefined,
+        }}
+      />
+    </AbsoluteFill>
+  );
+};
+
+export type LinhaLateral = {
+  rotulo: string;
+  valor?: number;
+  texto?: string;
+  casas?: number;
+  prefixo?: string;
+  sufixo?: string;
+  cor?: string;
+  quando?: number;
+};
+
+// Card compacto na lateral: resume os números sem esconder a tela gravada.
+export const CartaoLateral: React.FC<{
+  etiqueta?: string;
+  titulo: string;
+  linhas: LinhaLateral[];
+  rodape?: string;
+  lado?: "direita" | "esquerda";
+  topo?: number;
+}> = ({ etiqueta, titulo, linhas, rodape, lado = "direita", topo = 560 }) => {
+  const { fps } = useVideoConfig();
+  const p = useEntrada(0);
+  const saida = useSaida(10);
+  return (
+    <AbsoluteFill style={{ fontFamily: FONTE_TEXTO }}>
+      <div
+        style={{
+          position: "absolute",
+          top: topo,
+          [lado === "direita" ? "right" : "left"]: 36,
+          width: 400,
+          padding: "22px 26px 20px",
+          borderRadius: 18,
+          backgroundColor: "rgba(14,17,19,0.94)",
+          border: `1.5px solid ${COR.borda}`,
+          borderTop: `4px solid ${COR.azul}`,
+          boxShadow: "0 20px 60px rgba(0,0,0,0.45)",
+          color: COR.texto,
+          opacity: Math.min(p, saida),
+          translate: `${(1 - p) * (lado === "direita" ? 50 : -50)}px 0`,
+        }}
+      >
+        {etiqueta ? (
+          <div
+            style={{
+              fontSize: 16,
+              fontWeight: 700,
+              letterSpacing: 2,
+              textTransform: "uppercase",
+              color: COR.azulClaro,
+            }}
+          >
+            {etiqueta}
+          </div>
+        ) : null}
+        <div
+          style={{
+            fontFamily: FONTE_TITULO,
+            fontWeight: 800,
+            fontSize: 34,
+            marginTop: 4,
+          }}
+        >
+          <TextoComDestaque texto={titulo} cor={COR.verde} />
+        </div>
+        <div style={{ marginTop: 12 }}>
+          {linhas.map((l, i) => (
+            <LinhaDoCartao
+              key={l.rotulo}
+              linha={l}
+              atraso={
+                l.quando !== undefined ? Math.round(l.quando * fps) : 8 + i * 7
+              }
+            />
+          ))}
+        </div>
+        {rodape ? (
+          <div
+            style={{
+              marginTop: 12,
+              fontSize: 19,
+              color: COR.textoSuave,
+              lineHeight: 1.35,
+            }}
+          >
+            <TextoComDestaque texto={rodape} cor={COR.verde} />
+          </div>
+        ) : null}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+const LinhaDoCartao: React.FC<{ linha: LinhaLateral; atraso: number }> = ({
+  linha,
+  atraso,
+}) => {
+  const p = useEntrada(atraso);
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "baseline",
+        gap: 16,
+        padding: "9px 0",
+        borderTop: `1px solid ${COR.borda}`,
+        opacity: p,
+        translate: `0 ${(1 - p) * 12}px`,
+      }}
+    >
+      <span style={{ fontSize: 21, color: COR.textoSuave }}>
+        {linha.rotulo}
+      </span>
+      <span
+        style={{
+          fontFamily: FONTE_TITULO,
+          fontWeight: 800,
+          fontSize: 27,
+          whiteSpace: "nowrap",
+          color: linha.cor ?? COR.texto,
+        }}
+      >
+        {linha.valor !== undefined ? (
+          <Contador
+            valor={linha.valor}
+            casas={linha.casas}
+            prefixo={linha.prefixo}
+            sufixo={linha.sufixo}
+            atraso={atraso}
+            duracao={20}
+          />
+        ) : (
+          linha.texto
+        )}
+      </span>
+    </div>
+  );
+};
+
+// Selo de abertura de bloco sobre a tela (no lugar de um título em tela cheia).
+export const SeloSecao: React.FC<{
+  numero: string;
+  titulo: string;
+  subtitulo?: string;
+}> = ({ numero, titulo, subtitulo }) => {
+  const p = useEntrada(0);
+  const linha = useEntrada(6);
+  const saida = useSaida(10);
+  return (
+    <AbsoluteFill
+      style={{
+        justifyContent: "flex-end",
+        padding: "0 0 90px 70px",
+        fontFamily: FONTE_TEXTO,
+      }}
+    >
+      <div
+        style={{
+          alignSelf: "flex-start",
+          padding: "20px 30px 22px",
+          borderRadius: 18,
+          backgroundColor: "rgba(14,17,19,0.94)",
+          borderLeft: `6px solid ${COR.verde}`,
+          boxShadow: "0 18px 50px rgba(0,0,0,0.45)",
+          opacity: Math.min(p, saida),
+          translate: `${(1 - p) * -60}px 0`,
+        }}
+      >
+        <div
+          style={{
+            fontSize: 18,
+            fontWeight: 700,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+            color: COR.verde,
+          }}
+        >
+          {numero}
+        </div>
+        <div
+          style={{
+            fontFamily: FONTE_TITULO,
+            fontWeight: 900,
+            fontSize: 64,
+            color: COR.texto,
+            lineHeight: 1.05,
+            marginTop: 4,
+          }}
+        >
+          {titulo}
+        </div>
+        <div
+          style={{
+            height: 4,
+            width: 90 * linha,
+            backgroundColor: COR.verde,
+            borderRadius: 2,
+            margin: "10px 0 8px",
+          }}
+        />
+        {subtitulo ? (
+          <div style={{ fontSize: 24, color: COR.textoSuave }}>{subtitulo}</div>
+        ) : null}
       </div>
     </AbsoluteFill>
   );
