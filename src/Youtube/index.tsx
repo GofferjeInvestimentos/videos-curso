@@ -1,9 +1,12 @@
 import { Composition } from "remotion";
-import { duracaoEdicao, VideoAulaYoutube, type DadosEdicao } from "./Composicao";
+import {
+  duracaoEdicao,
+  VideoAulaYoutube,
+  type DadosEdicao,
+} from "./Composicao";
 import clipes from "./dados/clipes.json";
 import palavras from "./dados/palavras.json";
 import { carregarFontes } from "./fontes";
-import { cenas, zooms } from "./roteiro";
 import type { Clipe, Palavra } from "./tipos";
 
 const FPS = 30;
@@ -14,8 +17,6 @@ carregarFontes();
 const props: DadosEdicao = {
   clipes: clipes as Clipe[],
   palavras: palavras as Palavra[],
-  cenas,
-  zooms,
   marca: "Gofferjé Investimentos",
   legendas: false,
 };

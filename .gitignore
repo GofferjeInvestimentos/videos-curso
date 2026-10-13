@@ -7,5 +7,5 @@ dist
 out
 
 # Gravações brutas (grandes demais para o Git)
-public/raw
+raw
 public/proxy

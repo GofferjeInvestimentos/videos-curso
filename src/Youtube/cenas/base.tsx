@@ -69,7 +69,8 @@ export const FundoCena: React.FC<{ children: React.ReactNode }> = ({
           backgroundImage:
             "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
-          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 80%)",
+          maskImage:
+            "radial-gradient(ellipse at center, black 30%, transparent 80%)",
         }}
       />
       {children}
@@ -163,7 +164,14 @@ export const Contador: React.FC<{
   sufixo?: string;
   atraso?: number;
   duracao?: number;
-}> = ({ valor, casas = 0, prefixo = "", sufixo = "", atraso = 0, duracao = 30 }) => {
+}> = ({
+  valor,
+  casas = 0,
+  prefixo = "",
+  sufixo = "",
+  atraso = 0,
+  duracao = 30,
+}) => {
   const frame = useCurrentFrame();
   const p = interpolate(frame - atraso, [0, duracao], [0, 1], {
     extrapolateLeft: "clamp",

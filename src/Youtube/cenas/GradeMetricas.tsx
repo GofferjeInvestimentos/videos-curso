@@ -1,7 +1,16 @@
 import { AbsoluteFill, useVideoConfig } from "remotion";
 import { COR, FONTE_TITULO } from "../tema";
 import type { Metrica } from "./CartaoAtivo";
-import { Cartao, Contador, FundoCena, Rotulo, Sobe, TextoComDestaque, Titulo, useSaida } from "./base";
+import {
+  Cartao,
+  Contador,
+  FundoCena,
+  Rotulo,
+  Sobe,
+  TextoComDestaque,
+  Titulo,
+  useSaida,
+} from "./base";
 
 // Grade de números grandes com título (ex.: "Carteira após 1 mês").
 export const GradeMetricas: React.FC<{
@@ -16,41 +25,58 @@ export const GradeMetricas: React.FC<{
   return (
     <FundoCena>
       <AbsoluteFill
-        style={{ justifyContent: "center", alignItems: "center", opacity: saida, paddingBottom: 60 }}
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          opacity: saida,
+          paddingBottom: 60,
+        }}
       >
         {rotulo ? (
           <Sobe>
-            <Rotulo cor={COR.azul} style={{ textAlign: "center", marginBottom: 18 }}>
+            <Rotulo
+              cor={COR.azul}
+              style={{ textAlign: "center", marginBottom: 18 }}
+            >
               {rotulo}
             </Rotulo>
           </Sobe>
         ) : null}
         <Sobe atraso={3}>
-          <Titulo tamanho={60} style={{ textAlign: "center", maxWidth: 1400, marginBottom: 50 }}>
+          <Titulo
+            tamanho={60}
+            style={{ textAlign: "center", maxWidth: 1400, marginBottom: 50 }}
+          >
             <TextoComDestaque texto={titulo} />
           </Titulo>
         </Sobe>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${colunas}, ${colunas === 2 ? 520 : 440}px)`,
+            gridTemplateColumns: `repeat(${colunas}, ${colunas === 2 ? 560 : 480}px)`,
             gap: 28,
           }}
         >
           {metricas.map((m, i) => {
-            const atraso = m.quando !== undefined ? Math.round(m.quando * fps) : 12 + i * 10;
+            const atraso =
+              m.quando !== undefined ? Math.round(m.quando * fps) : 12 + i * 10;
             return (
               <Sobe key={m.rotulo} atraso={atraso} distancia={30}>
                 <Cartao
                   destaque={m.cor ? `${m.cor}77` : undefined}
-                  style={{ padding: "30px 34px", height: "100%", boxSizing: "border-box" }}
+                  style={{
+                    padding: "30px 34px",
+                    height: "100%",
+                    boxSizing: "border-box",
+                  }}
                 >
                   <Rotulo>{m.rotulo}</Rotulo>
                   <div
                     style={{
                       fontFamily: FONTE_TITULO,
                       fontWeight: 800,
-                      fontSize: 72,
+                      fontSize: colunas === 2 ? 72 : 60,
+                      whiteSpace: "nowrap",
                       marginTop: 10,
                       color: m.cor ?? COR.texto,
                       letterSpacing: -1,
@@ -65,7 +91,15 @@ export const GradeMetricas: React.FC<{
                     />
                   </div>
                   {m.nota ? (
-                    <div style={{ fontSize: 24, color: COR.textoSuave, marginTop: 6 }}>{m.nota}</div>
+                    <div
+                      style={{
+                        fontSize: 24,
+                        color: COR.textoSuave,
+                        marginTop: 6,
+                      }}
+                    >
+                      {m.nota}
+                    </div>
                   ) : null}
                 </Cartao>
               </Sobe>
@@ -74,7 +108,15 @@ export const GradeMetricas: React.FC<{
         </div>
         {rodape ? (
           <Sobe atraso={20 + metricas.length * 10}>
-            <div style={{ marginTop: 36, fontSize: 28, color: COR.textoSuave, textAlign: "center", maxWidth: 1200 }}>
+            <div
+              style={{
+                marginTop: 36,
+                fontSize: 28,
+                color: COR.textoSuave,
+                textAlign: "center",
+                maxWidth: 1200,
+              }}
+            >
               <TextoComDestaque texto={rodape} cor={COR.verde} />
             </div>
           </Sobe>

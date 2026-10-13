@@ -60,7 +60,11 @@ export const Legendas: React.FC<{
 
   return (
     <AbsoluteFill
-      style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: 64 }}
+      style={{
+        justifyContent: "flex-end",
+        alignItems: "center",
+        paddingBottom: 64,
+      }}
     >
       <div
         style={{
@@ -85,7 +89,11 @@ export const Legendas: React.FC<{
             <span
               key={`${p.de}-${i}`}
               style={{
-                color: ativa ? COR.verde : dita ? COR.texto : "rgba(245,247,250,0.78)",
+                color: ativa
+                  ? COR.verde
+                  : dita
+                    ? COR.texto
+                    : "rgba(245,247,250,0.78)",
               }}
             >
               {i > 0 ? " " : ""}

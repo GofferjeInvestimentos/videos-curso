@@ -1,5 +1,5 @@
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
-import { COR, FONTE_TITULO } from "../tema";
+import { COR, FONTE_TEXTO, FONTE_TITULO } from "../tema";
 import { TextoComDestaque, useEntrada, useSaida } from "./base";
 
 // Círculo vermelho "à mão" sobre um número na tela. Região em pixels do quadro.
@@ -28,7 +28,11 @@ export const Marcacao: React.FC<{
     C ${cx + rx * 0.55} ${cy - ry * 1.12}, ${cx + rx * 1.05} ${cy - ry * 0.75}, ${cx + rx * 0.98} ${cy - ry * 0.1}`;
   return (
     <AbsoluteFill style={{ opacity: saida }}>
-      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
+      <svg
+        width={1920}
+        height={1080}
+        style={{ position: "absolute", inset: 0 }}
+      >
         <path
           d={d}
           fill="none"
@@ -60,6 +64,7 @@ export const CaixaTexto: React.FC<{
         justifyContent: "flex-end",
         alignItems: posicao === "esquerda" ? "flex-start" : "flex-end",
         padding: "0 90px 210px",
+        fontFamily: FONTE_TEXTO,
       }}
     >
       <div
@@ -75,11 +80,20 @@ export const CaixaTexto: React.FC<{
           color: COR.texto,
         }}
       >
-        <div style={{ fontFamily: FONTE_TITULO, fontWeight: 800, fontSize: 38, lineHeight: 1.2 }}>
+        <div
+          style={{
+            fontFamily: FONTE_TITULO,
+            fontWeight: 800,
+            fontSize: 38,
+            lineHeight: 1.2,
+          }}
+        >
           <TextoComDestaque texto={texto} cor={cor} />
         </div>
         {apoio ? (
-          <div style={{ marginTop: 8, fontSize: 24, color: COR.textoSuave }}>{apoio}</div>
+          <div style={{ marginTop: 8, fontSize: 24, color: COR.textoSuave }}>
+            {apoio}
+          </div>
         ) : null}
       </div>
     </AbsoluteFill>
@@ -87,12 +101,21 @@ export const CaixaTexto: React.FC<{
 };
 
 // Identificação do apresentador (lower third).
-export const NomeApresentador: React.FC<{ nome: string; cargo: string }> = ({ nome, cargo }) => {
+export const NomeApresentador: React.FC<{ nome: string; cargo: string }> = ({
+  nome,
+  cargo,
+}) => {
   const p = useEntrada(0);
   const linha = useEntrada(6);
   const saida = useSaida(12);
   return (
-    <AbsoluteFill style={{ justifyContent: "flex-end", padding: "0 0 220px 110px" }}>
+    <AbsoluteFill
+      style={{
+        justifyContent: "flex-end",
+        padding: "0 0 220px 110px",
+        fontFamily: FONTE_TEXTO,
+      }}
+    >
       <div style={{ opacity: saida }}>
         <div
           style={{
@@ -107,7 +130,15 @@ export const NomeApresentador: React.FC<{ nome: string; cargo: string }> = ({ no
         >
           {nome}
         </div>
-        <div style={{ height: 5, width: 120 * linha, backgroundColor: COR.azul, borderRadius: 3, margin: "12px 0" }} />
+        <div
+          style={{
+            height: 5,
+            width: 120 * linha,
+            backgroundColor: COR.azul,
+            borderRadius: 3,
+            margin: "12px 0",
+          }}
+        />
         <div
           style={{
             fontSize: 28,

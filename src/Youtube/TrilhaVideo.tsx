@@ -47,7 +47,7 @@ const ClipeVideo: React.FC<{
 };
 
 // Sequência dos trechos mantidos. Com `avatar`, desenha só o rosto (sem áudio)
-// num quadrado de `avatar` pixels, para o círculo do apresentador nas cenas cheias.
+// num quadrado de `avatar` pixels, para o quadro do apresentador nas cenas cheias.
 export const TrilhaVideo: React.FC<{
   linha: ClipeNaLinha[];
   fps: number;

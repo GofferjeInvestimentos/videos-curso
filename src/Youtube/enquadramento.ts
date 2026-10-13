@@ -11,16 +11,17 @@ export const AREA_UTIL: Record<Layout, [number, number, number, number]> = {
 
 // Rosto do apresentador em pixels da fonte, usado no zoom e no avatar.
 export const ROSTO: Record<Layout, [number, number]> = {
-  camera: [1010, 400],
-  celular: [1045, 470],
-  tela: [1650, 330],
+  camera: [1010, 430],
+  celular: [1045, 500],
+  tela: [1655, 355],
 };
 
-// Raio aproximado do rosto (pixels da fonte) para enquadrar o avatar.
+// Meia largura da área mostrada no quadro do apresentador (pixels da fonte):
+// aberto o bastante para pegar cabeça e ombros sem cortar o rosto.
 export const ESCALA_ROSTO: Record<Layout, number> = {
-  camera: 260,
-  celular: 250,
-  tela: 105,
+  camera: 420,
+  celular: 400,
+  tela: 160,
 };
 
 // Matriz que leva a área útil a preencher o quadro e aplica um zoom extra
@@ -34,14 +35,17 @@ export const transformar = (
   const s = Math.max(LARGURA / w, ALTURA / h);
   const bx = LARGURA / 2 - s * (x + w / 2);
   const by = ALTURA / 2 - s * (y + h / 2);
-  const [qx, qy] = foco ?? [s * ROSTO[layout][0] + bx, s * ROSTO[layout][1] + by];
+  const [qx, qy] = foco ?? [
+    s * ROSTO[layout][0] + bx,
+    s * ROSTO[layout][1] + by,
+  ];
   const k = s * zoom;
   const tx = zoom * bx + qx * (1 - zoom);
   const ty = zoom * by + qy * (1 - zoom);
   return `matrix(${k}, 0, 0, ${k}, ${tx}, ${ty})`;
 };
 
-// Matriz para o avatar circular: centraliza o rosto num quadrado de lado `lado`.
+// Matriz do quadro do apresentador: centraliza o rosto num quadrado de lado `lado`.
 export const transformarAvatar = (layout: Layout, lado: number) => {
   const [fx, fy] = ROSTO[layout];
   const k = lado / (2 * ESCALA_ROSTO[layout]);

@@ -1,6 +1,14 @@
 import { AbsoluteFill } from "remotion";
 import { COR } from "../tema";
-import { FundoCena, Rotulo, Sobe, TextoComDestaque, Titulo, useEntrada, useSaida } from "./base";
+import {
+  FundoCena,
+  Rotulo,
+  Sobe,
+  TextoComDestaque,
+  Titulo,
+  useEntrada,
+  useSaida,
+} from "./base";
 
 // Cartão de abertura de capítulo: "Como *montar* a carteira".
 export const TituloSecao: React.FC<{
@@ -14,11 +22,18 @@ export const TituloSecao: React.FC<{
   return (
     <FundoCena>
       <AbsoluteFill
-        style={{ justifyContent: "center", alignItems: "center", opacity: saida }}
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          opacity: saida,
+        }}
       >
         {numero ? (
           <Sobe>
-            <Rotulo cor={corDestaque} style={{ textAlign: "center", marginBottom: 26 }}>
+            <Rotulo
+              cor={corDestaque}
+              style={{ textAlign: "center", marginBottom: 26 }}
+            >
               {numero}
             </Rotulo>
           </Sobe>
@@ -39,7 +54,14 @@ export const TituloSecao: React.FC<{
         />
         {subtitulo ? (
           <Sobe atraso={16}>
-            <div style={{ marginTop: 30, fontSize: 32, color: COR.textoSuave, textAlign: "center" }}>
+            <div
+              style={{
+                marginTop: 30,
+                fontSize: 32,
+                color: COR.textoSuave,
+                textAlign: "center",
+              }}
+            >
               {subtitulo}
             </div>
           </Sobe>

@@ -56,7 +56,7 @@ def subtrair(intervalos, cortes):
 
 
 clipes, todas_palavras = [], []
-for parte in PARTES:
+for parte in [p for p in PARTES if os.path.exists(f"{A}/{p}.palavras.json")]:
     palavras = json.load(open(f"{A}/{parte}.palavras.json"))
     cortes = [(r["de"], r["ate"]) for r in remover if r["parte"] == parte]
     # 1. Trechos de fala: junta palavras separadas por pausas curtas.
@@ -90,14 +90,15 @@ for parte in PARTES:
         while e - inicio > TROCA_ENQUADRAMENTO + 2:
             # Troca de enquadramento entre palavras, perto de 7s.
             alvo = inicio + TROCA_ENQUADRAMENTO
+            # Prefere fim de frase/vírgula perto do alvo; senão, qualquer fronteira de palavra.
             candidatos = [
-                (w2["s"] + w1["e"]) / 2
+                (abs(w1["e"] - alvo) - (1.5 if w1["w"][-1:] in ",.?!" else 0), (w1["e"] + w2["s"]) / 2)
                 for w1, w2 in zip(palavras, palavras[1:])
-                if alvo - 2 < w1["e"] < alvo + 2 and w2["s"] - w1["e"] > 0.12 and inicio + 4 < w1["e"] < e - 3
+                if abs(w1["e"] - alvo) < 3 and inicio + 4 < w1["e"] < e - 3
             ]
             if not candidatos:
                 break
-            meio = min(candidatos, key=lambda c: abs(c - alvo))
+            meio = min(candidatos)[1]
             clipes.append({"parte": parte, "inicio": round(inicio, 3), "fim": round(meio, 3), "layout": "camera", "zoom": ZOOM_FECHADO if zoom_fechado else 1})
             zoom_fechado = not zoom_fechado
             inicio = meio

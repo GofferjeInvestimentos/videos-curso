@@ -1,6 +1,14 @@
 import { AbsoluteFill } from "remotion";
 import { COR } from "../tema";
-import { Cartao, FundoCena, Sobe, TextoComDestaque, Titulo, useEntrada, useSaida } from "./base";
+import {
+  Cartao,
+  FundoCena,
+  Sobe,
+  TextoComDestaque,
+  Titulo,
+  useEntrada,
+  useSaida,
+} from "./base";
 
 // Cartão central de alerta/conceito: ícone, frase forte e explicação curta.
 export const Atencao: React.FC<{
@@ -13,9 +21,19 @@ export const Atencao: React.FC<{
   const pulso = useEntrada(6, 9);
   return (
     <FundoCena>
-      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", opacity: saida, paddingBottom: 60 }}>
+      <AbsoluteFill
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          opacity: saida,
+          paddingBottom: 60,
+        }}
+      >
         <Sobe>
-          <Cartao destaque={`${cor}99`} style={{ width: 980, padding: "52px 64px", textAlign: "center" }}>
+          <Cartao
+            destaque={`${cor}99`}
+            style={{ width: 980, padding: "52px 64px", textAlign: "center" }}
+          >
             <div
               style={{
                 margin: "0 auto 26px",
@@ -39,7 +57,14 @@ export const Atencao: React.FC<{
             </Titulo>
             {texto ? (
               <Sobe atraso={10}>
-                <div style={{ marginTop: 22, fontSize: 30, color: COR.textoSuave, lineHeight: 1.4 }}>
+                <div
+                  style={{
+                    marginTop: 22,
+                    fontSize: 30,
+                    color: COR.textoSuave,
+                    lineHeight: 1.4,
+                  }}
+                >
                   <TextoComDestaque texto={texto} cor={COR.texto} />
                 </div>
               </Sobe>

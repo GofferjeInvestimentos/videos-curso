@@ -18,6 +18,7 @@ import {
 } from "./linhaDoTempo";
 import { COR, FONTE_TEXTO } from "./tema";
 import type { Ancora, Cena, Clipe, Palavra } from "./tipos";
+import { cenas, zooms } from "./roteiro";
 import { TrilhaVideo } from "./TrilhaVideo";
 
 export type ZoomTela = {
@@ -25,18 +26,20 @@ export type ZoomTela = {
   duracao: number;
   // Região a destacar, em pixels do quadro de saída: [x, y, largura, altura].
   regiao: [number, number, number, number];
+  // Zoom máximo (padrão 1.7) para não estourar a resolução da gravação.
+  maximo?: number;
 };
 
+// Só dados serializáveis: o Remotion converte as props em JSON, então as cenas
+// (que são componentes) vêm direto do roteiro.
 export type DadosEdicao = {
   clipes: Clipe[];
   palavras: Palavra[];
-  cenas: Cena[];
-  zooms: ZoomTela[];
   marca: string;
   legendas: boolean;
 };
 
-const AVATAR = 150;
+const AVATAR = 230;
 const TRANSICAO = 8;
 
 const posicionar = (
@@ -62,7 +65,7 @@ const useZoomTela = (
   const z = zooms.find((x) => frame >= x.de && frame < x.de + x.quadros);
   if (!z) return undefined;
   const [x, y, w, h] = z.regiao;
-  const alvo = Math.min(1920 / w, 1080 / h);
+  const alvo = Math.min(1920 / w, 1080 / h, z.maximo ?? 1.7);
   const p = interpolate(
     frame - z.de,
     [0, 14, z.quadros - 14, z.quadros],
@@ -74,11 +77,13 @@ const useZoomTela = (
     },
   );
   const s = 1 + (alvo - 1) * p;
-  // Mantém a região centralizada sem mostrar fora do quadro.
-  const cx = Math.min(Math.max(x + w / 2, 960 / alvo), 1920 - 960 / alvo);
-  const cy = Math.min(Math.max(y + h / 2, 540 / alvo), 1080 - 540 / alvo);
-  const tx = (960 - cx * s) * p + 0 * (1 - p);
-  const ty = (540 - cy * s) * p;
+  // Centro da janela visível, preso aos limites para nunca mostrar fora do quadro.
+  const prender = (v: number, meio: number, total: number) =>
+    Math.min(Math.max(v, meio / s), total - meio / s);
+  const cx = prender(960 + (x + w / 2 - 960) * p, 960, 1920);
+  const cy = prender(540 + (y + h / 2 - 540) * p, 540, 1080);
+  const tx = 960 - cx * s;
+  const ty = 540 - cy * s;
   return `translate(${tx}px, ${ty}px) scale(${s})`;
 };
 
@@ -156,9 +161,9 @@ const Avatar: React.FC<{
         top: 48,
         width: AVATAR,
         height: AVATAR,
-        borderRadius: "50%",
+        borderRadius: 22,
         overflow: "hidden",
-        border: `4px solid ${COR.azul}`,
+        border: `3px solid ${COR.azul}`,
         boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
         opacity: p,
         scale: String(0.8 + 0.2 * p),
@@ -195,8 +200,6 @@ const Marca: React.FC<{ texto: string }> = ({ texto }) => (
 export const VideoAulaYoutube: React.FC<DadosEdicao> = ({
   clipes,
   palavras,
-  cenas,
-  zooms,
   marca,
   legendas,
 }) => {
@@ -213,7 +216,7 @@ export const VideoAulaYoutube: React.FC<DadosEdicao> = ({
         ...c,
         ...posicionar(linha, fps, c.ancora, c.duracao),
       })),
-    [cenas, linha, fps],
+    [linha, fps],
   );
   const zoomsLinha = useMemo(
     () =>
@@ -221,7 +224,7 @@ export const VideoAulaYoutube: React.FC<DadosEdicao> = ({
         ...z,
         ...posicionar(linha, fps, z.ancora, z.duracao),
       })),
-    [zooms, linha, fps],
+    [linha, fps],
   );
 
   const emCenaCheia = cenasLinha.some(
@@ -235,7 +238,9 @@ export const VideoAulaYoutube: React.FC<DadosEdicao> = ({
   );
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COR.fundo }}>
+    <AbsoluteFill
+      style={{ backgroundColor: COR.fundo, fontFamily: FONTE_TEXTO }}
+    >
       {/* Esconde o vídeo (mantendo o áudio) enquanto uma cena cobre a tela toda. */}
       <AbsoluteFill style={{ opacity: emCenaCheia ? 0 : 1 }}>
         <Palco

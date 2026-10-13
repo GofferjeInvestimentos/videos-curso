@@ -1,6 +1,14 @@
 import { AbsoluteFill, useVideoConfig } from "remotion";
 import { COR, FONTE_TITULO } from "../tema";
-import { Cartao, FundoCena, Rotulo, Sobe, TextoComDestaque, Titulo, useSaida } from "./base";
+import {
+  Cartao,
+  FundoCena,
+  Rotulo,
+  Sobe,
+  TextoComDestaque,
+  Titulo,
+  useSaida,
+} from "./base";
 
 export type Coluna = {
   topo: string;
@@ -23,17 +31,28 @@ export const Comparacao: React.FC<{
   return (
     <FundoCena>
       <AbsoluteFill
-        style={{ justifyContent: "center", alignItems: "center", opacity: saida, paddingBottom: 60 }}
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          opacity: saida,
+          paddingBottom: 60,
+        }}
       >
         {rotulo ? (
           <Sobe>
-            <Rotulo cor={COR.azul} style={{ textAlign: "center", marginBottom: 18 }}>
+            <Rotulo
+              cor={COR.azul}
+              style={{ textAlign: "center", marginBottom: 18 }}
+            >
               {rotulo}
             </Rotulo>
           </Sobe>
         ) : null}
         <Sobe atraso={3}>
-          <Titulo tamanho={58} style={{ textAlign: "center", maxWidth: 1400, marginBottom: 50 }}>
+          <Titulo
+            tamanho={58}
+            style={{ textAlign: "center", maxWidth: 1400, marginBottom: 50 }}
+          >
             <TextoComDestaque texto={titulo} />
           </Titulo>
         </Sobe>
@@ -43,16 +62,24 @@ export const Comparacao: React.FC<{
             return (
               <Sobe
                 key={c.titulo}
-                atraso={c.quando !== undefined ? Math.round(c.quando * fps) : 12 + i * 10}
+                atraso={
+                  c.quando !== undefined
+                    ? Math.round(c.quando * fps)
+                    : 12 + i * 10
+                }
                 style={{ display: "flex" }}
               >
-                <Cartao destaque={`${cor}88`} style={{ width: largura, padding: "30px 32px" }}>
+                <Cartao
+                  destaque={`${cor}88`}
+                  style={{ width: largura, padding: "30px 32px" }}
+                >
                   <Rotulo cor={cor}>{c.topo}</Rotulo>
                   <div
                     style={{
                       fontFamily: FONTE_TITULO,
                       fontWeight: 800,
                       fontSize: 44,
+                      whiteSpace: "nowrap",
                       marginTop: 10,
                       marginBottom: 22,
                     }}
@@ -82,8 +109,21 @@ export const Comparacao: React.FC<{
         </div>
         {conclusao ? (
           <Sobe atraso={20 + colunas.length * 10}>
-            <Cartao style={{ marginTop: 34, padding: "20px 34px", backgroundColor: COR.fundo2 }}>
-              <div style={{ fontSize: 28, fontStyle: "italic", color: COR.texto, textAlign: "center" }}>
+            <Cartao
+              style={{
+                marginTop: 34,
+                padding: "20px 34px",
+                backgroundColor: COR.fundo2,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 28,
+                  fontStyle: "italic",
+                  color: COR.texto,
+                  textAlign: "center",
+                }}
+              >
                 <TextoComDestaque texto={conclusao} cor={COR.verde} />
               </div>
             </Cartao>

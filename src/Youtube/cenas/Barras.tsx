@@ -1,8 +1,27 @@
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  interpolate,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { COR, FONTE_TITULO } from "../tema";
-import { Cartao, FundoCena, Rotulo, Sobe, TextoComDestaque, Titulo, useSaida } from "./base";
+import {
+  Cartao,
+  FundoCena,
+  Rotulo,
+  Sobe,
+  TextoComDestaque,
+  Titulo,
+  useSaida,
+} from "./base";
 
-export type Barra = { rotulo: string; valor: number; texto?: string; cor?: string; quando?: number };
+export type Barra = {
+  rotulo: string;
+  valor: number;
+  texto?: string;
+  cor?: string;
+  quando?: number;
+};
 
 // Barras horizontais crescendo (ex.: distribuição da carteira).
 export const Barras: React.FC<{
@@ -19,24 +38,38 @@ export const Barras: React.FC<{
   return (
     <FundoCena>
       <AbsoluteFill
-        style={{ justifyContent: "center", alignItems: "center", opacity: saida, paddingBottom: 60 }}
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          opacity: saida,
+          paddingBottom: 60,
+        }}
       >
         {rotulo ? (
           <Sobe>
-            <Rotulo cor={COR.azul} style={{ textAlign: "center", marginBottom: 18 }}>
+            <Rotulo
+              cor={COR.azul}
+              style={{ textAlign: "center", marginBottom: 18 }}
+            >
               {rotulo}
             </Rotulo>
           </Sobe>
         ) : null}
         <Sobe atraso={3}>
-          <Titulo tamanho={58} style={{ textAlign: "center", maxWidth: 1400, marginBottom: 46 }}>
+          <Titulo
+            tamanho={58}
+            style={{ textAlign: "center", maxWidth: 1400, marginBottom: 46 }}
+          >
             <TextoComDestaque texto={titulo} />
           </Titulo>
         </Sobe>
         <Sobe atraso={8}>
           <Cartao style={{ width: 1180, padding: "36px 44px" }}>
             {barras.map((b, i) => {
-              const atraso = b.quando !== undefined ? Math.round(b.quando * fps) : 14 + i * 8;
+              const atraso =
+                b.quando !== undefined
+                  ? Math.round(b.quando * fps)
+                  : 14 + i * 8;
               const p = interpolate(frame - atraso, [0, 26], [0, 1], {
                 extrapolateLeft: "clamp",
                 extrapolateRight: "clamp",
@@ -44,10 +77,28 @@ export const Barras: React.FC<{
               });
               const cor = b.cor ?? COR.azul;
               return (
-                <div key={b.rotulo} style={{ marginTop: i === 0 ? 0 : 28, opacity: Math.min(1, p * 3) }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 28 }}>
+                <div
+                  key={b.rotulo}
+                  style={{
+                    marginTop: i === 0 ? 0 : 28,
+                    opacity: Math.min(1, p * 3),
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontSize: 28,
+                    }}
+                  >
                     <span style={{ fontWeight: 600 }}>{b.rotulo}</span>
-                    <span style={{ fontFamily: FONTE_TITULO, fontWeight: 800, color: cor }}>
+                    <span
+                      style={{
+                        fontFamily: FONTE_TITULO,
+                        fontWeight: 800,
+                        color: cor,
+                      }}
+                    >
                       {b.texto ?? `${Math.round(b.valor * p)}%`}
                     </span>
                   </div>
