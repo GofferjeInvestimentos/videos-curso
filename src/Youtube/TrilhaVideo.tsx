@@ -28,7 +28,7 @@ const ClipeVideo: React.FC<{
 
   return (
     <OffthreadVideo
-      src={staticFile(`proxy/${clipe.parte}.mp4`)}
+      src={staticFile(`raw/${clipe.parte}.mp4`)}
       trimBefore={Math.round(clipe.inicio * fps)}
       muted={Boolean(avatar)}
       volume={(f) => Math.min(1, (f + 1) / RAMPA, (clipe.quadros - f) / RAMPA)}

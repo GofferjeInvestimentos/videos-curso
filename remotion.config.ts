@@ -7,4 +7,6 @@ import { Config } from "@remotion/cli/config";
 
 Config.setRspack(true);
 Config.setVideoImageFormat("jpeg");
+// Qualidade máxima do JPEG de cada quadro antes da codificação final.
+Config.setJpegQuality(100);
 Config.setOverwriteOutput(true);

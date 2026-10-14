@@ -19,7 +19,7 @@ clipes = json.load(open(f"{RAIZ}/src/Youtube/dados/clipes.json"))
 entradas, filtros, rotulos = [], [], []
 partes = sorted({c["parte"] for c in clipes})
 for p in partes:
-    entradas += ["-i", f"{RAIZ}/public/proxy/{p}.mp4"]
+    entradas += ["-i", f"{RAIZ}/proxy/{p}.mp4"]
 
 segundos = 0.0
 for i, c in enumerate(clipes):

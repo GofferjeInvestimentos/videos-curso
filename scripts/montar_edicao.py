@@ -28,7 +28,7 @@ ZOOM_FECHADO = 1.14
 
 layouts = json.load(open(f"{A}/layouts.json"))
 remover = json.load(open(os.path.join(RAIZ, "scripts", "remover.json")))
-duracoes = {p: float(os.popen(f"ffprobe -v error -show_entries format=duration -of csv=p=0 {RAIZ}/public/proxy/{p}.mp4").read() or 0) for p in PARTES}
+duracoes = {p: float(os.popen(f"ffprobe -v error -show_entries format=duration -of csv=p=0 {RAIZ}/proxy/{p}.mp4").read() or 0) for p in PARTES}
 
 
 def layout_em(parte, t):
