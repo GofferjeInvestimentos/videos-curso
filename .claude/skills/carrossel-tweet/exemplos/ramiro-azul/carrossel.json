@@ -1,0 +1,28 @@
+{
+ "perfil": "perfil.exemplo.json",
+ "saida": "slides",
+ "slides": [
+  {
+   "texto": "A Azul na semana passada: 80 VOOS cancelados e milhares de passageiros FURIOSOS no aeroporto.\n\nQuem estendeu a mão para resolver? Foram as MAIORES concorrentes.\n\nE o motivo disso é algo que eu acredito profundamente...",
+   "imagem": "assets/p1.png"
+  },
+  {
+   "texto": "Alguns dias atrás, Viracopos ficou horas sem energia. É o principal hub da Azul, com quase 200 voos por dia. Aqui já foi um caos.\n\nNo fim do dia veio o segundo golpe: uma falha na recepção de GPS fez a Azul deixar os jatos Embraer E2 no chão. Resultado? Mais de um terço da frota parada.",
+   "imagem": "assets/p2.png"
+  },
+  {
+   "texto": "Foram mais de 80 voos cancelados e mais de 8 mil passageiros afetados.\n\nNuma hora dessas, o manual diz que a concorrência aproveita. Pega o cliente irritado e oferece passagem.\n\nSó que não foi isso que aconteceu.",
+   "imagem": "assets/p3.png"
+  },
+  {
+   "texto": "O CEO da Azul, John Rodgerson, que recebeu várias ligações da LATAM ao longo do dia, oferecendo ajuda pra acomodar os passageiros.\n\nO grupo dono da GOL também mandou mensagem se colocando à disposição.\n\nE isso tem uma lógica que pouca gente enxerga.",
+   "imagem": "assets/p4.png"
+  },
+  {
+   "texto": "Quando um passageiro fica preso no aeroporto, ele não fica bravo só com a Azul. Ele passa a desconfiar de companhia aérea e achar que nada funciona.\n\nO prejuízo cai no colo do setor inteiro. Quem ajuda a apagar o incêndio tá protegendo o próprio mercado.\n\nEm outro setor, eu já vivi isso na pele."
+  },
+  {
+   "texto": "Ajudar concorrente não diminui a sua fatia. Aumenta o bolo.\n\nFoi assim que a aviação se protegeu e é assim que eu enxergo o meu mercado.\n\nSe você tem uma consultoria, ou quer construir a sua, eu quero te ajudar a crescer do mesmo jeito que me ajudaram:\n\nComenta CONSULTORIA e o time vai entrar em contato contigo para te entregar um Roadmap de Escala em Wealth."
+  }
+ ]
+}

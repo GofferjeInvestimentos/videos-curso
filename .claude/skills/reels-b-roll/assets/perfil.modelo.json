@@ -1,0 +1,33 @@
+{
+  "nome": "",
+  "instagram": "",
+  "setor": "",
+
+  "capa": {
+    "cor": "",
+    "titulo_tom": "frase curta e provocativa, não o assunto"
+  },
+
+  "inserts": {
+    "acento": "#FFC928"
+  },
+
+  "legenda": {
+    "caixa": "#000000",
+    "correcoes": {}
+  },
+
+  "ritmo": 1.25,
+
+  "camera": {
+    "origem": "",
+    "resolucao": "",
+    "recorte": "",
+    "rosto": null,
+    "legenda_queimada": false
+  },
+
+  "fontes_confiaveis": [],
+
+  "historico": []
+}

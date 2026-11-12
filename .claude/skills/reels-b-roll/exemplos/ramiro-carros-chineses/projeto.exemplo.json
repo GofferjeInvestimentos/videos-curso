@@ -1,0 +1,32 @@
+{
+ "perfil": "C:/Users/<voce>/reels-b-roll/perfis/ramiro-gomes-ferreira.json  (modelo: perfil.exemplo.json)",
+ "video": "C:/Users/<voce>/Downloads/ramirogomesferreira_Dd2bFJlJ4A2.mp4",
+ "transcricao": "transcricao.json",
+ "saida": "ramiro_reels_b_roll.mp4",
+ "inserts": "roteiro.json",
+ "gancho": {
+  "texto": "Os chineses estão dominando o Brasil (mas tu ainda não percebeu)",
+  "ate": "e tem motivo"
+ },
+ "legenda": {
+  "correcoes": {
+   "acharam": "taxaram",
+   "dia.": "pro dia."
+  }
+ },
+ "layout": {
+  "recortes": [
+   {
+    "de": {
+     "frase": "são muitas perguntas",
+     "ajuste": 0.2
+    },
+    "recorte": "720:640:0:40",
+    "rosto": [
+     360,
+     290
+    ]
+   }
+  ]
+ }
+}

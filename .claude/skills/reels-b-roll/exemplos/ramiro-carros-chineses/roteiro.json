@@ -1,0 +1,111 @@
+[
+  {"de": 0, "video": {"arquivo": "broll/recarga2.mp4", "inicio": 1}},
+
+  {"de": "e tem motivo", "video": {"arquivo": "broll/paulista.mp4", "inicio": 20}},
+
+  {"de": "e o mercado sentiu",
+   "fonte": "EMPLACAMENTOS AGO/2026 · JATO VIA GRUPO SENTINELA",
+   "cards": [{"imagem": "assets/foto_gwm.jpg", "largura": 620, "y": 330, "em": 0.1}],
+   "elementos": [
+     {"el": "texto", "texto": "GWM", "tam": 44, "peso": 900, "cor": "acento", "x": 300, "y": 640, "em": "a gwm"},
+     {"el": "numero", "valor": 9924, "tam": 96, "x": 300, "y": 730, "em": "vende mais", "duracao": 0.8},
+     {"el": "texto", "texto": "HONDA", "tam": 44, "peso": 900, "cor": "suave", "x": 780, "y": 640, "em": "honda"},
+     {"el": "numero", "valor": 9677, "tam": 96, "cor": "suave", "x": 780, "y": 730, "em": "honda", "duracao": 0.8},
+     {"el": "pill", "texto": "1ª VEZ QUE A GWM PASSA A HONDA NUM MÊS", "tam": 26, "y": 850, "em": {"frase": "honda", "ajuste": 0.8}}]},
+
+  {"de": "em 2020",
+   "elementos": [
+     {"el": "texto", "texto": "2020", "tam": 190, "peso": 900, "cor": "acento", "y": 330, "em": 0.05},
+     {"el": "texto", "texto": "quase ninguém tinha elétrico", "tam": 42, "peso": 700, "y": 500, "em": "ninguém", "anim": "up"},
+     {"el": "pill", "texto": "\"OLHA O CARA COM UM CARRO DE PILHA\"", "tam": 32, "cor": "branco", "y": 660, "em": "olha o cara"}]},
+
+  {"de": "agora o país",
+   "fonte": "DIÁRIO DO GRANDE ABC · 25/09/2026",
+   "cards": [{"imagem": "assets/print_1milhao_b.png", "recorte": [0, 0, 1080, 790], "largura": 960, "y": 470, "em": 0,
+              "marcas": [{"caixa": [795, 378, 978, 440], "em": "um milhão"}]}]},
+
+  {"de": "e aqui vem o contraste",
+   "fonte": "AUTOESPORTE (DADO ABVE) · REUTERS",
+   "elementos": [
+     {"el": "pill", "texto": "1º SEMESTRE DE 2026 · VENDA DE ELÉTRICOS", "tam": 28, "y": 110, "em": 0.1},
+     {"el": "texto", "texto": "MUNDO", "tam": 44, "peso": 900, "cor": "suave", "x": 290, "y": 330, "em": "no mundo"},
+     {"el": "numero", "valor": 11, "prefixo": "−", "sufixo": "%", "tam": 170, "cor": "vermelho", "x": 290, "y": 480, "em": "caiu", "duracao": 0.6},
+     {"el": "texto", "texto": "BRASIL", "tam": 44, "peso": 900, "cor": "acento", "x": 790, "y": 330, "em": "no brasil"},
+     {"el": "numero", "valor": 147, "prefixo": "+", "sufixo": "%", "tam": 170, "cor": "acento", "x": 790, "y": 480, "em": "disparou", "duracao": 1.0}]},
+
+  {"de": "mas não te engana", "video": {"arquivo": "broll/transito.mp4", "inicio": 4}},
+
+  {"de": "os estados unidos",
+   "fonte": "TARIFAS SOBRE O ELÉTRICO CHINÊS (2024) · EXAME · OBSERVADOR",
+   "elementos": [
+     {"el": "pill", "texto": "A PORTA FECHOU LÁ FORA", "tam": 30, "y": 120, "em": 0.1},
+     {"el": "texto", "texto": "EUA", "tam": 54, "peso": 900, "x": 290, "y": 330, "em": 0.1},
+     {"el": "texto", "texto": "100%", "tam": 170, "peso": 900, "cor": "vermelho", "x": 290, "y": 490, "em": "100"},
+     {"el": "texto", "texto": "EUROPA", "tam": 54, "peso": 900, "x": 790, "y": 330, "em": "europa"},
+     {"el": "texto", "texto": "até 45%", "tam": 120, "peso": 900, "cor": "vermelho", "x": 790, "y": 490, "em": "barreira pesada"},
+     {"el": "texto", "texto": "de tarifa sobre o carro elétrico chinês", "tam": 34, "peso": 600, "cor": "suave", "y": 660, "em": {"frase": "barreira pesada", "ajuste": 0.4}, "anim": "up"}]},
+
+  {"de": "então sobrou", "video": {"arquivo": "broll/porto.mp4", "inicio": 3}},
+
+  {"de": "e o brasil nunca", "video": {"arquivo": "broll/fabrica.mp4", "inicio": 0}},
+
+  {"de": "e o resultado",
+   "video": {"arquivo": "broll/robo.mp4", "inicio": 1, "sombra": true},
+   "elementos": [{"el": "texto", "texto": "GUERRA\nDE PREÇOS", "tam": 120, "peso": 900, "contorno": 3, "y": 450, "em": "guerra de preços"}]},
+
+  {"de": "um carro popular",
+   "fonte": "FOTOS: MAXI-NAPO-99 (CC BY 4.0) · ALEXANDER MIGL (CC BY-SA 4.0)",
+   "cards": [{"imagem": "assets/foto_argo.jpg", "largura": 470, "x": 290, "y": 320, "em": "fiat argo"},
+             {"imagem": "assets/foto_dolphin.jpg", "largura": 470, "x": 790, "y": 320, "em": "dolphin mini"}],
+   "elementos": [
+     {"el": "texto", "texto": "FIAT ARGO\n(combustão)", "tam": 36, "peso": 800, "x": 290, "y": 560, "em": "fiat argo", "anim": "up"},
+     {"el": "texto", "texto": "≈ R$ 108 mil", "tam": 70, "peso": 900, "x": 290, "y": 680, "em": {"frase": "110", "ajuste": 0.1}},
+     {"el": "texto", "texto": "BYD DOLPHIN MINI\n(elétrico)", "tam": 36, "peso": 800, "cor": "acento", "x": 790, "y": 560, "em": "dolphin mini", "anim": "up"},
+     {"el": "texto", "texto": "R$ 118.990", "tam": 70, "peso": 900, "cor": "acento", "x": 790, "y": 680, "em": "120"},
+     {"el": "texto", "texto": "preços de tabela (Argo Trekking) · Canaltech", "tam": 24, "peso": 600, "cor": "suave", "y": 840, "em": "120"}]},
+
+  {"de": "e aí que a conta",
+   "video": {"arquivo": "broll/posto.mp4", "inicio": 0, "sombra": true},
+   "elementos": [{"el": "pill", "texto": "UM CARRO A MENOS NO POSTO", "tam": 44, "y": 450, "em": "cada carro elétrico"}]},
+
+  {"de": "só em 2025", "video": {"arquivo": "broll/refinaria.mp4", "inicio": 5}},
+
+  {"de": "e o city diz",
+   "fonte": "BRAZIL JOURNAL · 05/08/2026",
+   "cards": [{"imagem": "assets/print_citi.png", "recorte": [0, 495, 1080, 880], "largura": 960, "y": 300, "em": 0,
+              "marcas": [{"caixa": [28, 160, 735, 223], "em": "diz"}]}],
+   "elementos": [
+     {"el": "texto", "texto": "PICO DA GASOLINA", "tam": 46, "peso": 900, "y": 590, "em": "pico", "anim": "up"},
+     {"el": "texto", "texto": "2026", "tam": 150, "peso": 900, "cor": "acento", "y": 730, "em": "pico"}]},
+
+  {"de": "no cenário mais agressivo",
+   "fonte": "CITI · VIA BRAZIL JOURNAL",
+   "elementos": [
+     {"el": "pill", "texto": "CENÁRIO MAIS AGRESSIVO DO CITI", "tam": 28, "y": 130, "em": 0.1},
+     {"el": "numero", "valor": 68, "sufixo": "%", "tam": 220, "cor": "acento", "y": 400, "em": "68", "duracao": 0.8},
+     {"el": "texto", "texto": "dos carros novos vendidos\nno Brasil seriam elétricos", "tam": 44, "peso": 700, "y": 600, "em": {"frase": "68", "ajuste": 0.4}, "anim": "up"},
+     {"el": "texto", "texto": "em 2035", "tam": 60, "peso": 900, "y": 740, "em": "2035"}]},
+
+  {"de": "ou seja",
+   "foto": {"imagem": "assets/foto_dolphin.jpg", "zoom": [1.0, 1.12], "credito": "FOTO: ALEXANDER MIGL · CC BY-SA 4.0"},
+   "elementos": [{"el": "texto", "texto": "FOI O PREÇO", "tam": 120, "peso": 900, "contorno": 3, "y": 450, "em": "foi o preço"}]},
+
+  {"de": "inclusive eu mesmo", "video": {"arquivo": "broll/sp_aereo.mp4", "inicio": 10}},
+
+  {"de": "e a lição",
+   "video": {"arquivo": "broll/carteira.mp4", "inicio": 0, "sombra": true},
+   "elementos": [
+     {"el": "pill", "texto": "PODER DE COMPRA APERTADO", "tam": 44, "y": 380, "em": "poder de compra"},
+     {"el": "pill", "texto": "MUDOU O PREÇO, MUDOU A IDEIA", "tam": 44, "cor": "vermelho", "y": 560, "em": "mudou quando"}]},
+
+  {"de": "aí até que ponto",
+   "elementos": [
+     {"el": "texto", "texto": "ATÉ ONDE VAI?", "tam": 90, "peso": 900, "y": 200, "em": 0.1},
+     {"el": "pill", "texto": "PREÇO DA GASOLINA?", "tam": 40, "y": 400, "em": "preço da gasolina"},
+     {"el": "pill", "texto": "PETROLÍFERAS?", "tam": 40, "y": 520, "em": "petrolifras"},
+     {"el": "pill", "texto": "MONTADORAS?", "tam": 40, "y": 640, "em": "montadoras"}]},
+
+  {"de": "dá dois cliques",
+   "video": {"arquivo": "broll/sp_aereo.mp4", "inicio": 30, "sombra": true},
+   "elementos": [{"el": "pill", "texto": "SIGA PRA ACOMPANHAR", "tam": 46, "y": 450, "em": "me segue"}]}
+]

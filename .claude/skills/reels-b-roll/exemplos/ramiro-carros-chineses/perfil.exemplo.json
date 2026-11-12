@@ -1,0 +1,38 @@
+{
+  "nome": "Ramiro Gomes Ferreira",
+  "instagram": "@ramirogomesferreira",
+  "setor": "fundador do Clube do Valor; negócios, economia e investimentos para empresários",
+
+  "capa": {
+    "cor": "#FC6D00",
+    "titulo_tom": "frase curta e provocativa, com parêntese de cutucada (ex.: 'Os chineses estão dominando o Brasil (mas tu ainda não percebeu)')"
+  },
+
+  "inserts": {
+    "acento": "#FFC928"
+  },
+
+  "legenda": {
+    "caixa": "#000000",
+    "correcoes": {"Bio": "BYD", "ID": "", "Iuan": "Yuan", "City": "Citi", "valanche": "avalanche", "petrolifras": "petrolíferas"}
+  },
+
+  "ritmo": 1.0,
+
+  "camera": {
+    "origem": "estúdio (biblioteca), câmera fixa; o reel publicado já vem editado em tela dividida",
+    "resolucao": "720x1280",
+    "recorte": "692:615:14:665",
+    "rosto": [346, 150],
+    "legenda_queimada": true,
+    "obs": "no reel editado a legenda dele ocupa a costura até y~660: recortar a partir de 665"
+  },
+
+  "fontes_confiaveis": [
+    "ABVE (vendas e frota de eletrificados)",
+    "Brazil Journal (análises de bancos, ex.: Citi)",
+    "Diário do Grande ABC / Vrum (setor automotivo; print funciona)"
+  ],
+
+  "historico": []
+}
